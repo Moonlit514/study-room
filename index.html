@@ -256,6 +256,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
 
+// Fetch server time offset to correct for clock skew between devices
+let serverOffset = 0;
+onValue(ref(db, ".info/serverTimeOffset"), snap => {
+  serverOffset = snap.val() || 0;
+});
+const serverNow = () => Date.now() + serverOffset;
+
 /* ── STATE ── */
 let myId = null, myRef = null, joinTime = null, meData = {};
 let localStream = null;
@@ -290,11 +297,12 @@ tickClock(); setInterval(tickClock, 1000);
 
 /* ── LISTEN MEMBERS ── */
 onValue(ref(db,"members"), snap => {
-  const raw = snap.val() || {}, now = Date.now();
+  const raw = snap.val() || {}, now = serverNow();
   const prev = {...allMembers};
   allMembers = {};
   Object.entries(raw).forEach(([id,m]) => {
-    if(now - m.lastSeen < 10000) allMembers[id] = m;
+    // Use a generous 30-second window to handle clock skew between devices
+    if(now - m.lastSeen < 30000) allMembers[id] = m;
   });
 
   if(myId) {
@@ -322,7 +330,7 @@ function renderLobby() {
     <div class="lobby-card" style="animation-delay:${i*.06}s" data-id="${id}">
       <div class="lc-top"><div class="lc-av">${av(m.username)}</div>
         <div><div class="lc-name">${esc(m.username)}</div>
-          <div class="lc-meta"><span class="lc-time">⏱ ${fmt(Date.now()-m.joinTime)}</span>${m.sharing?'<span class="lc-sbadge">📺 共享中</span>':""}</div>
+          <div class="lc-meta"><span class="lc-time">⏱ ${fmt(serverNow()-m.joinTime)}</span>${m.sharing?'<span class="lc-sbadge">📺 共享中</span>':""}</div>
         </div></div>
       <div class="lc-task">${esc(m.task)}</div>
       <div class="lc-hint">点击查看详情 →</div>
@@ -372,7 +380,7 @@ function renderRoom() {
             <div class="mc-name">${esc(m.username)}</div>
             <div class="mc-meta">
               <div class="mc-dot"></div>
-              <span class="mc-time" id="mtime-${id}">已学习 ${fmt(Date.now()-m.joinTime)}</span>
+              <span class="mc-time" id="mtime-${id}">已学习 ${fmt(serverNow()-m.joinTime)}</span>
               ${m.sharing?'<span class="mc-sb" id="msb-${id}">📺 共享中</span>':`<span id="msb-${id}"></span>`}
             </div>
             <div class="mc-task">${esc(m.task)}</div>
@@ -383,7 +391,7 @@ function renderRoom() {
     } else {
       // update dynamic parts
       const tEl = card.querySelector(`#mtime-${id}`);
-      if(tEl) tEl.textContent = "已学习 " + fmt(Date.now()-m.joinTime);
+      if(tEl) tEl.textContent = "已学习 " + fmt(serverNow()-m.joinTime);
       const sbEl = card.querySelector(`#msb-${id}`);
       if(sbEl) sbEl.innerHTML = m.sharing ? '📺 共享中' : '';
       const ph = card.querySelector(`#sph-${id}`);
@@ -532,17 +540,17 @@ window.handleJoin = async () => {
   const btn = document.getElementById("confirm-btn");
   btn.textContent="进入中…"; btn.disabled=true;
   try {
-    myId = uid(); joinTime = Date.now();
+    myId = uid(); joinTime = serverNow();
     myRef = ref(db, `members/${myId}`);
-    meData = { username, task, joinTime, lastSeen: Date.now(), sharing: false };
+    meData = { username, task, joinTime, lastSeen: serverNow(), sharing: false };
     await set(myRef, meData);
 
     heartTimer = setInterval(async () => {
-      try { meData.lastSeen = Date.now(); await set(myRef, meData); } catch{}
-    }, 3000);
+      try { meData.lastSeen = serverNow(); await set(myRef, meData); } catch{}
+    }, 2000);
 
     elapsedTimer = setInterval(() => {
-      document.getElementById("my-el").textContent = "⏱ " + fmt(Date.now() - joinTime);
+      document.getElementById("my-el").textContent = "⏱ " + fmt(serverNow() - joinTime);
     }, 1000);
 
     closeJoinModal();
@@ -577,7 +585,7 @@ window.toggleShare = async () => {
     // close all sharer connections
     Object.values(sharerConns).forEach(pc=>{try{pc.close();}catch{}});
     sharerConns={};
-    try{ meData.lastSeen=Date.now(); await set(myRef,meData); }catch{}
+    try{ meData.lastSeen=serverNow(); await set(myRef,meData); }catch{}
   } else {
     try {
       localStream = await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
@@ -585,11 +593,11 @@ window.toggleShare = async () => {
         localStream=null; sw.classList.remove("on"); desc.textContent="开启后他人可实时查看";
         Object.values(sharerConns).forEach(pc=>{try{pc.close();}catch{}});
         sharerConns={};
-        meData.sharing=false; meData.lastSeen=Date.now();
+        meData.sharing=false; meData.lastSeen=serverNow();
         set(myRef,meData).catch(()=>{});
       });
       sw.classList.add("on"); desc.textContent="屏幕共享已开启 🟢";
-      meData.sharing=true; meData.lastSeen=Date.now();
+      meData.sharing=true; meData.lastSeen=serverNow();
       try{ await set(myRef,meData); }catch{}
     } catch { localStream=null; sw.classList.remove("on"); }
   }
@@ -618,10 +626,10 @@ window.openDetail = (id, m) => {
   document.getElementById("d-av").textContent   = av(m.username);
   document.getElementById("d-name").textContent = m.username;
   document.getElementById("d-task").textContent = "📌 " + m.task;
-  document.getElementById("d-el").textContent   = "已学习 " + fmt(Date.now()-m.joinTime);
+  document.getElementById("d-el").textContent   = "已学习 " + fmt(serverNow()-m.joinTime);
   clearInterval(detTimer);
   detTimer = setInterval(() => {
-    const c=allMembers[id]; if(c) document.getElementById("d-el").textContent="已学习 "+fmt(Date.now()-c.joinTime);
+    const c=allMembers[id]; if(c) document.getElementById("d-el").textContent="已学习 "+fmt(serverNow()-c.joinTime);
   },1000);
 
   const dv=document.getElementById("det-video"), dp=document.getElementById("det-ph"), dptxt=document.getElementById("det-ph-txt");
