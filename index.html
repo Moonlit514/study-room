@@ -6,20 +6,10 @@
 <title>自习室 · Study Room</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap');
-
-:root {
-  --gold: rgba(210,168,68,1);
-  --gold-dim: rgba(210,168,68,0.18);
-  --gold-faint: rgba(210,168,68,0.07);
-  --ink: #0b0906;
-  --text: rgba(230,212,172,0.92);
-  --muted: rgba(180,158,110,0.5);
-  --green: rgba(72,200,120,0.85);
-}
+:root{--gold:rgba(210,168,68,1);--gold-dim:rgba(210,168,68,0.18);--gold-faint:rgba(210,168,68,0.07);--ink:#0b0906;--text:rgba(230,212,172,0.92);--muted:rgba(180,158,110,0.5);--green:rgba(72,200,120,0.85);}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
 body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);min-height:100vh;overflow-x:hidden;}
-
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 15% 10%,#1c1508 0%,#0b0906 55%,#08070d 100%);}
 .glow{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;}
 .g1{width:700px;height:500px;background:rgba(210,168,68,.055);top:-180px;left:-220px;}
@@ -28,10 +18,9 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 
 /* HEADER */
 .site-header{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:1.3rem 2.5rem;border-bottom:1px solid rgba(210,168,68,.07);}
-.hclock{position:absolute;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;}
 .brand{font-family:'Cinzel',serif;font-size:.8rem;color:rgba(210,168,68,.55);letter-spacing:.35em;display:flex;align-items:center;gap:.7rem;}
 .brand-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.5;}
-.hclock{text-align:center;}
+.hclock{position:absolute;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;}
 .htime{font-family:'DM Mono',monospace;font-size:1.5rem;color:rgba(220,190,110,.9);letter-spacing:.08em;line-height:1;}
 .hdate{font-size:.62rem;color:var(--muted);letter-spacing:.14em;margin-top:.25rem;}
 .leave-btn{display:none;background:transparent;border:1px solid rgba(220,90,70,.25);border-radius:1px;color:rgba(220,100,80,.6);font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;padding:.45rem .9rem;cursor:pointer;transition:all .3s;}
@@ -92,11 +81,8 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 /* ROOM */
 #room{display:none;position:relative;z-index:1;flex-direction:column;}
 .room-body{flex:1;display:grid;grid-template-columns:280px 1fr;gap:2rem;max-width:1200px;margin:0 auto;width:100%;padding:2rem 2rem 3rem;}
-
 .panel-lbl{font-size:.62rem;color:rgba(210,168,68,.42);letter-spacing:.25em;margin-bottom:1.1rem;display:flex;align-items:center;gap:.7rem;}
 .panel-lbl::after{content:'';flex:1;height:1px;background:rgba(210,168,68,.08);}
-
-/* MY PANEL */
 .my-panel{position:sticky;top:2rem;align-self:start;}
 .my-card{background:rgba(210,168,68,.04);border:1px solid rgba(210,168,68,.14);border-radius:2px;padding:1.7rem;position:relative;overflow:hidden;}
 .my-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,rgba(210,168,68,.7),rgba(210,168,68,.08));}
@@ -105,8 +91,6 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 .my-el{font-family:'DM Mono',monospace;font-size:.82rem;color:rgba(210,168,68,.65);margin-bottom:1.1rem;}
 .my-tl{font-size:.6rem;color:var(--muted);letter-spacing:.18em;margin-bottom:.38rem;}
 .my-tv{font-size:.88rem;color:rgba(208,182,136,.75);line-height:1.6;padding:.75rem;background:rgba(0,0,0,.18);border-radius:1px;border-left:2px solid rgba(210,168,68,.18);}
-
-/* share toggle */
 .share-tog{display:flex;align-items:center;gap:1rem;padding:.85rem 1rem;border:1px solid rgba(210,168,68,.1);border-radius:1px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .3s;user-select:none;margin-top:1rem;}
 .share-tog:hover{border-color:rgba(210,168,68,.22);}
 .tog-icon{font-size:1.1rem;opacity:.7;}
@@ -117,88 +101,55 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 .tog-knob{width:14px;height:14px;border-radius:50%;background:rgba(180,150,100,.5);position:absolute;top:2px;left:2px;transition:all .3s;}
 .tog-sw.on .tog-knob{left:18px;background:rgba(220,185,110,.9);}
 
-/* MEMBERS GRID — card layout */
+/* MEMBER CARDS */
 .mems-panel{}
 .mems-hdr{display:flex;align-items:center;margin-bottom:1.1rem;}
 .mems-cnt{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);margin-left:.4rem;}
-
-/* Members shown as cards in a grid */
 .mems-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;}
-
-.mem-card{background:rgba(14,11,7,.8);border:1px solid rgba(210,168,68,.1);border-radius:2px;overflow:hidden;transition:all .28s;animation:cin .45s cubic-bezier(.16,1,.3,1) both;}
-.mem-card:hover{border-color:rgba(210,168,68,.25);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.4);}
-
-/* Screen preview thumbnail */
-.mem-screen-preview{
-  width:100%;aspect-ratio:16/9;
-  background:rgba(0,0,0,.6);
-  position:relative;overflow:hidden;
-  cursor:pointer;
-}
-.mem-screen-preview video{width:100%;height:100%;object-fit:cover;display:block;}
-.mem-screen-placeholder{
-  width:100%;height:100%;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:var(--muted);gap:.5rem;
-}
-.mem-screen-placeholder-ico{font-size:1.5rem;opacity:.3;}
-.mem-screen-placeholder-txt{font-size:.68rem;letter-spacing:.08em;opacity:.6;}
-.mem-screen-overlay{
-  position:absolute;inset:0;
-  background:rgba(0,0,0,0);
-  display:flex;align-items:center;justify-content:center;
-  transition:background .25s;
-}
-.mem-screen-overlay:hover{background:rgba(0,0,0,.35);}
-.mem-screen-expand{
-  opacity:0;transform:scale(.8);transition:all .25s;
-  background:rgba(210,168,68,.2);border:1px solid rgba(210,168,68,.5);
-  border-radius:1px;padding:.4rem .9rem;
-  font-size:.68rem;color:rgba(220,190,110,.95);letter-spacing:.15em;
-  font-family:'Cinzel',serif;
-}
-.mem-screen-overlay:hover .mem-screen-expand{opacity:1;transform:scale(1);}
-
-/* Card info section */
+.mem-card{background:rgba(14,11,7,.8);border:1px solid rgba(210,168,68,.1);border-radius:2px;overflow:hidden;transition:border-color .28s,transform .28s,box-shadow .28s;cursor:pointer;}
+.mem-card:hover{border-color:rgba(210,168,68,.28);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.4);}
+.mem-screen-wrap{width:100%;aspect-ratio:16/9;background:#000;position:relative;overflow:hidden;}
+.mem-screen-wrap video{width:100%;height:100%;object-fit:cover;display:block;}
+.mem-screen-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);gap:.5rem;background:#000;}
+.mem-screen-ph-ico{font-size:1.5rem;opacity:.3;}
+.mem-screen-ph-txt{font-size:.68rem;letter-spacing:.08em;opacity:.6;}
+.mem-hover-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .25s;}
+.mem-card:hover .mem-hover-hint{background:rgba(0,0,0,.4);}
+.mem-expand-lbl{opacity:0;transform:scale(.85);transition:all .25s;background:rgba(210,168,68,.2);border:1px solid rgba(210,168,68,.5);border-radius:1px;padding:.4rem .9rem;font-size:.68rem;color:rgba(220,190,110,.95);letter-spacing:.15em;font-family:'Cinzel',serif;}
+.mem-card:hover .mem-expand-lbl{opacity:1;transform:scale(1);}
 .mem-info-row{padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;}
 .mem-av{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.95rem;border:1px solid rgba(210,168,68,.14);background:linear-gradient(135deg,rgba(100,80,180,.14),rgba(60,50,120,.08));}
 .mem-details{flex:1;min-width:0;}
 .mc-name{font-size:.9rem;font-weight:600;color:rgba(210,188,148,.88);margin-bottom:.15rem;}
-.mc-meta{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem;}
+.mc-meta{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem;flex-wrap:wrap;}
 .mc-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(72,200,120,.4);animation:pg 2s infinite;flex-shrink:0;}
 .mc-time{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);}
 .mc-sb{font-size:.58rem;padding:.1rem .35rem;border-radius:1px;background:rgba(72,200,120,.1);border:1px solid rgba(72,200,120,.22);color:rgba(72,200,120,.75);}
 .mc-task{font-size:.75rem;color:rgba(175,152,108,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-
 .empty-st{grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--muted);}
 .empty-ico{font-size:2.2rem;margin-bottom:.9rem;opacity:.35;}
 .empty-txt{font-size:.82rem;letter-spacing:.08em;line-height:1.9;}
 
-/* FULLSCREEN MODAL */
-.det-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,3,2,.9);backdrop-filter:blur(12px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;animation:fi .25s ease;}
+/* FULLSCREEN */
+.det-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,3,2,.92);backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;animation:fi .25s ease;}
 .det-overlay.hidden{display:none;}
-.det-top{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:900px;margin-bottom:1rem;}
+.det-top{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:960px;margin-bottom:1rem;}
 .det-info{display:flex;align-items:center;gap:1rem;}
-.det-av{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:1px solid rgba(210,168,68,.22);background:linear-gradient(135deg,rgba(210,155,50,.2),rgba(180,125,40,.1));}
+.det-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:1px solid rgba(210,168,68,.22);background:linear-gradient(135deg,rgba(210,155,50,.2),rgba(180,125,40,.1));}
 .det-name{font-size:1rem;font-weight:600;color:rgba(228,205,152,.95);}
 .det-el{font-family:'DM Mono',monospace;font-size:.78rem;color:rgba(210,168,68,.6);margin-top:.15rem;}
-.det-task{font-size:.78rem;color:var(--muted);margin-top:.1rem;}
+.det-task{font-size:.75rem;color:var(--muted);margin-top:.1rem;}
 .det-close{background:transparent;border:1px solid rgba(210,168,68,.2);border-radius:1px;color:var(--muted);font-size:.75rem;font-family:'Cinzel',serif;letter-spacing:.2em;padding:.45rem .9rem;cursor:pointer;transition:all .3s;}
 .det-close:hover{border-color:rgba(210,168,68,.5);color:var(--text);}
-
-/* fullscreen video */
-.det-screen{width:100%;max-width:900px;aspect-ratio:16/9;background:rgba(0,0,0,.7);border:1px solid rgba(210,168,68,.12);border-radius:2px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.det-screen{width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border:1px solid rgba(210,168,68,.12);border-radius:2px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .det-screen video{width:100%;height:100%;object-fit:contain;display:none;}
-.det-screen-ph{text-align:center;color:var(--muted);}
-.det-screen-ph-ico{font-size:2.5rem;opacity:.25;margin-bottom:.8rem;}
-.det-screen-ph-txt{font-size:.8rem;letter-spacing:.08em;line-height:1.8;}
+.det-ph{text-align:center;color:var(--muted);}
+.det-ph-ico{font-size:2.5rem;opacity:.25;margin-bottom:.8rem;}
+.det-ph-txt{font-size:.8rem;letter-spacing:.08em;line-height:1.8;}
 .connecting{font-size:.75rem;color:rgba(210,168,68,.5);display:flex;align-items:center;gap:.7rem;}
 .spin{width:12px;height:12px;border:1.5px solid rgba(210,168,68,.2);border-top-color:rgba(210,168,68,.7);border-radius:50%;animation:sp .8s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg)}}
-
-/* toast */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(200,60,40,.9);color:#fff;font-size:.8rem;padding:.7rem 1.5rem;border-radius:2px;z-index:999;display:none;}
-
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(180,50,30,.92);color:#fff;font-size:.8rem;padding:.7rem 1.5rem;border-radius:2px;z-index:999;display:none;white-space:nowrap;}
 .hidden{display:none!important;}
 @media(max-width:800px){
   .room-body{grid-template-columns:1fr;padding:1.2rem 1rem 2rem;}
@@ -210,19 +161,12 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<div class="glow g1"></div>
-<div class="glow g2"></div>
-<div class="glow g3"></div>
+<div class="bg"></div><div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
 <div class="toast" id="toast"></div>
 
-<!-- HEADER -->
 <header class="site-header">
   <div class="brand"><div class="brand-dot"></div>STUDY ROOM<div class="brand-dot"></div></div>
-  <div class="hclock">
-    <div class="htime" id="htime">--:--</div>
-    <div class="hdate" id="hdate"></div>
-  </div>
+  <div class="hclock"><div class="htime" id="htime">--:--</div><div class="hdate" id="hdate"></div></div>
   <div style="min-width:120px;display:flex;justify-content:flex-end;">
     <button class="leave-btn" id="leave-btn" onclick="handleLeave()">离开自习室</button>
   </div>
@@ -235,13 +179,8 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
     <div class="lobby-title">自习室</div>
     <div class="lobby-sub">专注当下，与同行者共进</div>
   </div>
-  <div class="count-badge">
-    <div class="live-dot"></div>
-    <div class="count-txt">当前在线 <span class="count-n" id="lobby-count">0</span> 人正在自习</div>
-  </div>
-  <div class="lobby-grid" id="lobby-grid">
-    <div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div>
-  </div>
+  <div class="count-badge"><div class="live-dot"></div><div class="count-txt">当前在线 <span class="count-n" id="lobby-count">0</span> 人正在自习</div></div>
+  <div class="lobby-grid" id="lobby-grid"><div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div></div>
   <button class="start-btn" onclick="openJoinModal()">开始自习</button>
 </div>
 
@@ -250,16 +189,8 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
   <div class="modal">
     <div class="modal-title">进入自习室</div>
     <div class="modal-sub">告诉大家你是谁，今天要做什么</div>
-    <div class="field">
-      <label>用户名</label>
-      <input id="inp-user" placeholder="你想被叫什么？"/>
-      <div class="field-err" id="err-user"></div>
-    </div>
-    <div class="field">
-      <label>今日任务</label>
-      <input id="inp-task" placeholder="今天要专注什么？"/>
-      <div class="field-err" id="err-task"></div>
-    </div>
+    <div class="field"><label>用户名</label><input id="inp-user" placeholder="你想被叫什么？"/><div class="field-err" id="err-user"></div></div>
+    <div class="field"><label>今日任务</label><input id="inp-task" placeholder="今天要专注什么？"/><div class="field-err" id="err-task"></div></div>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeJoinModal()">取消</button>
       <button class="btn-confirm" id="confirm-btn" onclick="handleJoin()">进入自习室 →</button>
@@ -270,7 +201,6 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 <!-- ROOM -->
 <div id="room">
   <div class="room-body">
-    <!-- My sidebar -->
     <div class="my-panel">
       <div class="panel-lbl">我的状态</div>
       <div class="my-card">
@@ -281,52 +211,36 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
         <div class="my-tv" id="my-tv"></div>
         <div class="share-tog" onclick="toggleShare()">
           <div class="tog-icon">🖥️</div>
-          <div style="flex:1;">
-            <div class="tog-lbl">共享我的屏幕</div>
-            <div class="tog-desc" id="tog-desc">开启后他人可实时查看</div>
-          </div>
+          <div style="flex:1;"><div class="tog-lbl">共享我的屏幕</div><div class="tog-desc" id="tog-desc">开启后他人可实时查看</div></div>
           <div class="tog-sw" id="tog-sw"><div class="tog-knob"></div></div>
         </div>
       </div>
     </div>
-
-    <!-- Members -->
     <div class="mems-panel">
-      <div class="mems-hdr">
-        <div class="panel-lbl" style="margin-bottom:0;flex:1;">自习室成员 <span class="mems-cnt" id="room-cnt">(0 人)</span></div>
-      </div>
-      <div class="mems-grid" id="room-grid">
-        <div class="empty-st"><div class="empty-ico">🌙</div><div class="empty-txt">自习室目前只有你<br>把链接分享给朋友，一起专注吧</div></div>
-      </div>
+      <div class="mems-hdr"><div class="panel-lbl" style="margin-bottom:0;flex:1;">自习室成员 <span class="mems-cnt" id="room-cnt">(0 人)</span></div></div>
+      <div class="mems-grid" id="room-grid"></div>
     </div>
   </div>
 </div>
 
-<!-- FULLSCREEN DETAIL -->
+<!-- FULLSCREEN -->
 <div class="det-overlay hidden" id="det-overlay">
   <div class="det-top">
     <div class="det-info">
       <div class="det-av" id="d-av">👤</div>
-      <div>
-        <div class="det-name" id="d-name"></div>
-        <div class="det-el" id="d-el"></div>
-        <div class="det-task" id="d-task"></div>
-      </div>
+      <div><div class="det-name" id="d-name"></div><div class="det-el" id="d-el"></div><div class="det-task" id="d-task"></div></div>
     </div>
     <button class="det-close" onclick="closeDetail()">✕ 关闭</button>
   </div>
   <div class="det-screen" id="det-screen">
-    <div class="det-screen-ph" id="det-ph">
-      <div class="det-screen-ph-ico">🖥️</div>
-      <div class="det-screen-ph-txt" id="det-ph-txt">该成员未开启屏幕共享</div>
-    </div>
+    <div class="det-ph" id="det-ph"><div class="det-ph-ico">🖥️</div><div class="det-ph-txt" id="det-ph-txt">该成员未开启屏幕共享</div></div>
     <video id="det-video" autoplay playsinline></video>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, remove }
+import { getDatabase, ref, set, onValue, remove, serverTimestamp }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -339,146 +253,118 @@ const firebaseConfig = {
   appId: "1:510744691186:web:852cd6bbbef776c648eb6b"
 };
 
-let app, db;
-try { app = initializeApp(firebaseConfig); db = getDatabase(app); }
-catch(e) { showToast("Firebase 初始化失败：" + e.message); }
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
 
-/* STATE */
-let myId=null, myRef=null, joinTime=null, meData={};
-let localStream=null;
-// peerConns: map of viewerId -> RTCPeerConnection (sharer side)
-let peerConns = {};
-// previewConns: map of memberId -> { pc, stream } (viewer side, for thumbnails)
-let previewConns = {};
-// detailConn: RTCPeerConnection for the fullscreen modal
-let detailConn=null, viewingId=null;
-let heartTimer=null, elapsedTimer=null, detTimer=null;
-let allMembers={};
+/* ── STATE ── */
+let myId = null, myRef = null, joinTime = null, meData = {};
+let localStream = null;
+let sharerConns  = {};   // viewerId  -> RTCPeerConnection  (I am sharer)
+let viewerConns  = {};   // sharerId  -> RTCPeerConnection  (I am viewer, thumbnail)
+let viewerStreams = {};   // sharerId  -> MediaStream
+let detConn = null, viewingId = null;
+let heartTimer = null, elapsedTimer = null, detTimer = null;
+let allMembers = {};
+const ICE = { iceServers: [{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}] };
 
-const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
-const fmt = ms => { const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60; return h>0?`${h}h ${m}m ${sec}s`:m>0?`${m}m ${sec}s`:`${sec}s`; };
-const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-const AVS = ["👩‍💻","👨‍🎓","🧑‍🎨","👩‍🔬","🧑‍💼","👨‍🏫","🧑‍🚀","👩‍🎤","🧑‍🔬","👨‍💻","🧑‍🍳","👨‍🎨"];
-const av  = n => AVS[n.charCodeAt(0) % AVS.length];
-const ICE = { iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}] };
+/* ── UTILS ── */
+const uid  = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+const fmt  = ms => { if(ms<0) ms=0; const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sc=s%60; return h?`${h}h ${m}m ${sc}s`:m?`${m}m ${sc}s`:`${sc}s`; };
+const esc  = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const AVS  = ["👩‍💻","👨‍🎓","🧑‍🎨","👩‍🔬","🧑‍💼","👨‍🏫","🧑‍🚀","👩‍🎤","🧑‍🔬","👨‍💻","🧑‍🍳","👨‍🎨"];
+const av   = n => AVS[n.charCodeAt(0) % AVS.length];
 
-function showToast(msg, dur=4000) {
+function showToast(msg) {
   const t = document.getElementById("toast");
-  t.textContent=msg; t.style.display="block";
-  setTimeout(()=>t.style.display="none", dur);
+  t.textContent = msg; t.style.display = "block";
+  setTimeout(()=>{ t.style.display="none"; }, 5000);
 }
 
-/* CLOCK */
+/* ── CLOCK ── */
 const tickClock = () => {
-  const n=new Date();
-  document.getElementById("htime").textContent=n.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"});
-  document.getElementById("hdate").textContent=n.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"short"});
+  const n = new Date();
+  document.getElementById("htime").textContent = n.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"});
+  document.getElementById("hdate").textContent = n.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"short"});
 };
-tickClock(); setInterval(tickClock,1000);
+tickClock(); setInterval(tickClock, 1000);
 
-/* LISTEN MEMBERS */
-onValue(ref(db,"members"), snap=>{
-  const raw=snap.val()||{}, now=Date.now();
+/* ── LISTEN MEMBERS ── */
+onValue(ref(db,"members"), snap => {
+  const raw = snap.val() || {}, now = Date.now();
   const prev = {...allMembers};
-  allMembers={};
-  Object.entries(raw).forEach(([id,m])=>{ if(now-m.lastSeen<9000) allMembers[id]=m; });
+  allMembers = {};
+  Object.entries(raw).forEach(([id,m]) => {
+    if(now - m.lastSeen < 10000) allMembers[id] = m;
+  });
 
-  // connect previews for new sharing members
   if(myId) {
-    Object.entries(allMembers).forEach(([id,m])=>{
-      if(id!==myId && m.sharing && !previewConns[id]) {
-        connectPreview(id);
-      }
+    // start thumbnail connections for new sharers
+    Object.entries(allMembers).forEach(([id,m]) => {
+      if(id !== myId && m.sharing && !viewerConns[id]) startThumbnail(id);
     });
-    // disconnect previews for members who stopped sharing or left
-    Object.keys(previewConns).forEach(id=>{
-      if(!allMembers[id] || !allMembers[id].sharing) {
-        disconnectPreview(id);
-      }
+    // drop connections for departed/stopped members
+    Object.keys(viewerConns).forEach(id => {
+      if(!allMembers[id] || !allMembers[id].sharing) dropThumbnail(id);
     });
   }
 
   renderLobby();
   if(myId) renderRoom();
-}, err=>showToast("连接失败："+err.message));
+}, err => showToast("数据库错误: " + err.message));
 
-/* ── RENDER LOBBY ── */
-function renderLobby(){
-  const others=Object.entries(allMembers).filter(([id])=>id!==myId);
-  document.getElementById("lobby-count").textContent=others.length;
-  const grid=document.getElementById("lobby-grid");
-  if(!others.length){ grid.innerHTML='<div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div>'; return; }
-  grid.innerHTML=others.map(([id,m],i)=>`
+/* ── LOBBY ── */
+function renderLobby() {
+  const others = Object.entries(allMembers).filter(([id]) => id !== myId);
+  document.getElementById("lobby-count").textContent = others.length;
+  const g = document.getElementById("lobby-grid");
+  if(!others.length) { g.innerHTML='<div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div>'; return; }
+  g.innerHTML = others.map(([id,m],i) => `
     <div class="lobby-card" style="animation-delay:${i*.06}s" data-id="${id}">
-      <div class="lc-top">
-        <div class="lc-av">${av(m.username)}</div>
-        <div>
-          <div class="lc-name">${esc(m.username)}</div>
-          <div class="lc-meta">
-            <span class="lc-time">⏱ ${fmt(Date.now()-m.joinTime)}</span>
-            ${m.sharing?'<span class="lc-sbadge">📺 共享中</span>':""}
-          </div>
-        </div>
-      </div>
+      <div class="lc-top"><div class="lc-av">${av(m.username)}</div>
+        <div><div class="lc-name">${esc(m.username)}</div>
+          <div class="lc-meta"><span class="lc-time">⏱ ${fmt(Date.now()-m.joinTime)}</span>${m.sharing?'<span class="lc-sbadge">📺 共享中</span>':""}</div>
+        </div></div>
       <div class="lc-task">${esc(m.task)}</div>
       <div class="lc-hint">点击查看详情 →</div>
-    </div>
-  `).join("");
-  grid.querySelectorAll(".lobby-card").forEach(el=>{
-    el.onclick=()=>openDetail(el.dataset.id, allMembers[el.dataset.id]);
-  });
+    </div>`).join("");
+  g.querySelectorAll(".lobby-card").forEach(el =>
+    el.onclick = () => openDetail(el.dataset.id, allMembers[el.dataset.id])
+  );
 }
 
-/* ── RENDER ROOM ── */
-function renderRoom(){
-  const others=Object.entries(allMembers).filter(([id])=>id!==myId);
-  document.getElementById("room-cnt").textContent=`(${others.length} 人)`;
-  const grid=document.getElementById("room-grid");
+/* ── ROOM ── */
+function renderRoom() {
+  const others = Object.entries(allMembers).filter(([id]) => id !== myId);
+  document.getElementById("room-cnt").textContent = `(${others.length} 人)`;
+  const grid = document.getElementById("room-grid");
 
-  if(!others.length){
-    grid.innerHTML='<div class="empty-st"><div class="empty-ico">🌙</div><div class="empty-txt">自习室目前只有你<br>把链接分享给朋友，一起专注吧</div></div>';
+  if(!others.length) {
+    grid.innerHTML = '<div class="empty-st"><div class="empty-ico">🌙</div><div class="empty-txt">自习室目前只有你<br>把链接分享给朋友，一起专注吧</div></div>';
     return;
   }
 
-  // preserve existing video elements
-  const existing={};
-  grid.querySelectorAll(".mem-card[data-id]").forEach(el=>{
-    existing[el.dataset.id]=el;
-  });
-
   const newIds = new Set(others.map(([id])=>id));
 
-  // remove empty state and cards for gone members
-  grid.querySelectorAll(".empty-st").forEach(el=>el.remove());
-  Object.keys(existing).forEach(id=>{ if(!newIds.has(id)) existing[id].remove(); });
+  // remove stale cards + empty state
+  [...grid.children].forEach(el => {
+    if(!el.dataset.id || !newIds.has(el.dataset.id)) el.remove();
+  });
 
-  others.forEach(([id,m],i)=>{
-    if(existing[id]){
-      // update text parts only
-      const el=existing[id];
-      el.querySelector(".mc-name").textContent=m.username;
-      el.querySelector(".mc-time").textContent="已学习 "+fmt(Date.now()-m.joinTime);
-      const sbEl=el.querySelector(".mc-sb");
-      if(m.sharing && !sbEl){ el.querySelector(".mc-meta").insertAdjacentHTML("beforeend",'<span class="mc-sb">📺 共享中</span>'); }
-      else if(!m.sharing && sbEl){ sbEl.remove(); }
-      // attach/update video stream if available
-      attachPreviewVideo(id, el);
-    } else {
-      // create new card
-      const div=document.createElement("div");
-      div.className="mem-card";
-      div.dataset.id=id;
-      div.style.animationDelay=`${i*.05}s`;
-      div.innerHTML=`
-        <div class="mem-screen-preview" data-id="${id}">
-          <div class="mem-screen-placeholder" id="ph-${id}">
-            <div class="mem-screen-placeholder-ico">🖥️</div>
-            <div class="mem-screen-placeholder-txt">${m.sharing?"正在连接…":"未开启共享"}</div>
+  others.forEach(([id,m], i) => {
+    let card = grid.querySelector(`.mem-card[data-id="${id}"]`);
+    if(!card) {
+      card = document.createElement("div");
+      card.className = "mem-card";
+      card.dataset.id = id;
+      card.style.animationDelay = `${i*.05}s`;
+      card.innerHTML = `
+        <div class="mem-screen-wrap">
+          <div class="mem-screen-ph" id="sph-${id}">
+            <div class="mem-screen-ph-ico">🖥️</div>
+            <div class="mem-screen-ph-txt">${m.sharing?"连接中…":"未开启共享"}</div>
           </div>
-          <video id="prev-${id}" autoplay playsinline muted style="display:none;width:100%;height:100%;object-fit:cover;"></video>
-          <div class="mem-screen-overlay">
-            <div class="mem-screen-expand">${m.sharing?"展开查看":"—"}</div>
-          </div>
+          <video id="svid-${id}" autoplay playsinline muted style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"></video>
+          <div class="mem-hover-hint"><div class="mem-expand-lbl">展开查看</div></div>
         </div>
         <div class="mem-info-row">
           <div class="mem-av">${av(m.username)}</div>
@@ -486,204 +372,277 @@ function renderRoom(){
             <div class="mc-name">${esc(m.username)}</div>
             <div class="mc-meta">
               <div class="mc-dot"></div>
-              <span class="mc-time">已学习 ${fmt(Date.now()-m.joinTime)}</span>
-              ${m.sharing?'<span class="mc-sb">📺 共享中</span>':""}
+              <span class="mc-time" id="mtime-${id}">已学习 ${fmt(Date.now()-m.joinTime)}</span>
+              ${m.sharing?'<span class="mc-sb" id="msb-${id}">📺 共享中</span>':`<span id="msb-${id}"></span>`}
             </div>
             <div class="mc-task">${esc(m.task)}</div>
           </div>
-        </div>
-      `;
-      div.querySelector(".mem-screen-preview").onclick=()=>openDetail(id,allMembers[id]);
-      grid.appendChild(div);
-      attachPreviewVideo(id, div);
+        </div>`;
+      card.onclick = () => openDetail(id, allMembers[id]);
+      grid.appendChild(card);
+    } else {
+      // update dynamic parts
+      const tEl = card.querySelector(`#mtime-${id}`);
+      if(tEl) tEl.textContent = "已学习 " + fmt(Date.now()-m.joinTime);
+      const sbEl = card.querySelector(`#msb-${id}`);
+      if(sbEl) sbEl.innerHTML = m.sharing ? '📺 共享中' : '';
+      const ph = card.querySelector(`#sph-${id}`);
+      if(ph) ph.querySelector(".mem-screen-ph-txt").textContent = m.sharing ? "连接中…" : "未开启共享";
     }
+    // attach stream if available
+    attachStream(id);
   });
 }
 
-function attachPreviewVideo(id, cardEl) {
-  const conn = previewConns[id];
-  if(!conn || !conn.stream) return;
-  const video = cardEl.querySelector(`#prev-${id}`);
-  const ph    = cardEl.querySelector(`#ph-${id}`);
-  if(video && video.srcObject !== conn.stream){
-    video.srcObject = conn.stream;
+function attachStream(id) {
+  const stream = viewerStreams[id];
+  const video  = document.getElementById(`svid-${id}`);
+  const ph     = document.getElementById(`sph-${id}`);
+  if(!video) return;
+  if(stream && video.srcObject !== stream) {
+    video.srcObject = stream;
     video.style.display = "block";
     if(ph) ph.style.display = "none";
   }
 }
 
-/* ── PREVIEW WebRTC (thumbnail) ── */
-async function connectPreview(sharerId) {
-  if(previewConns[sharerId]) return;
-  const connId = myId + "_prev";
+/* ── THUMBNAIL WebRTC ──
+   Signal path: signals/SHARER_ID/offers/VIEWER_ID  (viewer writes offer)
+                signals/SHARER_ID/answers/VIEWER_ID (sharer writes answer)
+                signals/SHARER_ID/vic/VIEWER_ID/N   (viewer ICE)
+                signals/SHARER_ID/sic/VIEWER_ID/N   (sharer ICE)
+*/
+async function startThumbnail(sharerId) {
+  if(viewerConns[sharerId]) return;
   const pc = new RTCPeerConnection(ICE);
-  previewConns[sharerId] = { pc, stream: null };
-  pc.addTransceiver("video",{direction:"recvonly"});
+  viewerConns[sharerId] = pc;
+  pc.addTransceiver("video", {direction:"recvonly"});
 
   pc.ontrack = e => {
-    previewConns[sharerId].stream = e.streams[0];
-    // attach to card if exists
-    const card = document.querySelector(`.mem-card[data-id="${sharerId}"]`);
-    if(card) attachPreviewVideo(sharerId, card);
-    // also feed detail modal if open for this member
-    if(viewingId===sharerId){
-      const dv=document.getElementById("det-video"), dp=document.getElementById("det-ph");
-      dv.srcObject=e.streams[0]; dv.style.display="block"; dp.style.display="none";
+    viewerStreams[sharerId] = e.streams[0];
+    attachStream(sharerId);
+    // feed fullscreen modal if open for this member
+    if(viewingId === sharerId) feedDetail(e.streams[0]);
+  };
+
+  let vic = [];
+  pc.onicecandidate = e => {
+    if(e.candidate) {
+      set(ref(db,`signals/${sharerId}/vic/${myId}/${vic.length}`), {c:e.candidate.toJSON()});
+      vic.push(1);
     }
   };
 
-  let ibuf=[];
-  pc.onicecandidate=e=>{
-    if(e.candidate){
-      set(ref(db,`signals/${sharerId}/from/${myId}_prev/vi/${ibuf.length}`),{c:e.candidate.toJSON()});
-      ibuf.push(1);
-    }
-  };
-
-  const offer=await pc.createOffer();
+  const offer = await pc.createOffer();
   await pc.setLocalDescription(offer);
-  await set(ref(db,`signals/${sharerId}/from/${myId}_prev/offer`),{sdp:offer.sdp,type:offer.type});
+  await set(ref(db,`signals/${sharerId}/offers/${myId}`), {sdp:offer.sdp, type:offer.type});
 
-  const ansRef=ref(db,`signals/${sharerId}/from/${myId}_prev/answer`);
-  const unsub=onValue(ansRef,async snap=>{
-    if(!snap.val()||pc.signalingState!=="have-local-offer") return;
-    await pc.setRemoteDescription(snap.val()); unsub();
+  // listen for answer
+  onValue(ref(db,`signals/${sharerId}/answers/${myId}`), async snap => {
+    if(!snap.val() || pc.signalingState !== "have-local-offer") return;
+    try { await pc.setRemoteDescription(snap.val()); } catch{}
   });
-  onValue(ref(db,`signals/${sharerId}/from/${myId}_prev/si`),snap=>{
-    Object.values(snap.val()||{}).forEach(async c=>{
-      try{await pc.addIceCandidate(new RTCIceCandidate(c.c));}catch{}
+
+  // listen for sharer ICE
+  onValue(ref(db,`signals/${sharerId}/sic/${myId}`), snap => {
+    Object.values(snap.val()||{}).forEach(async c => {
+      try { await pc.addIceCandidate(new RTCIceCandidate(c.c)); } catch{}
     });
+  });
+
+  pc.onconnectionstatechange = () => {
+    if(["failed","closed"].includes(pc.connectionState)) dropThumbnail(sharerId);
+  };
+}
+
+function dropThumbnail(id) {
+  const pc = viewerConns[id];
+  if(pc) { try{pc.close();}catch{} delete viewerConns[id]; }
+  delete viewerStreams[id];
+  const video = document.getElementById(`svid-${id}`);
+  if(video) { video.srcObject=null; video.style.display="none"; }
+  const ph = document.getElementById(`sph-${id}`);
+  if(ph) { ph.style.display="flex"; ph.querySelector(".mem-screen-ph-txt").textContent="未开启共享"; }
+  if(myId) remove(ref(db,`signals/${id}/offers/${myId}`)).catch(()=>{});
+}
+
+/* ── SHARER side: listen for viewer offers ── */
+function listenAsSharer() {
+  onValue(ref(db,`signals/${myId}/offers`), async snap => {
+    const viewers = snap.val() || {};
+    for(const [vid, offerData] of Object.entries(viewers)) {
+      if(sharerConns[vid] || !localStream) continue;
+      await answerViewer(vid, offerData);
+    }
   });
 }
 
-function disconnectPreview(id) {
-  const conn = previewConns[id];
-  if(!conn) return;
-  try{ conn.pc.close(); }catch{}
-  delete previewConns[id];
-  // reset card UI
-  const card=document.querySelector(`.mem-card[data-id="${id}"]`);
-  if(card){
-    const v=card.querySelector(`#prev-${id}`);
-    const ph=card.querySelector(`#ph-${id}`);
-    if(v){v.srcObject=null;v.style.display="none";}
-    if(ph){ph.style.display="flex";ph.querySelector(".mem-screen-placeholder-txt").textContent="未开启共享";}
-  }
-  remove(ref(db,`signals/${id}/from/${myId}_prev`)).catch(()=>{});
+async function answerViewer(vid, offerData) {
+  const pc = new RTCPeerConnection(ICE);
+  sharerConns[vid] = pc;
+  localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+
+  let sic = [];
+  pc.onicecandidate = e => {
+    if(e.candidate) {
+      set(ref(db,`signals/${myId}/sic/${vid}/${sic.length}`), {c:e.candidate.toJSON()});
+      sic.push(1);
+    }
+  };
+
+  try {
+    await pc.setRemoteDescription({sdp:offerData.sdp, type:offerData.type});
+    const answer = await pc.createAnswer();
+    await pc.setLocalDescription(answer);
+    await set(ref(db,`signals/${myId}/answers/${vid}`), {sdp:answer.sdp, type:answer.type});
+  } catch(e) { return; }
+
+  // listen for viewer ICE
+  onValue(ref(db,`signals/${myId}/vic/${vid}`), snap => {
+    Object.values(snap.val()||{}).forEach(async c => {
+      try { await pc.addIceCandidate(new RTCIceCandidate(c.c)); } catch{}
+    });
+  });
+
+  pc.onconnectionstatechange = () => {
+    if(["disconnected","failed","closed"].includes(pc.connectionState)) {
+      pc.close(); delete sharerConns[vid];
+      remove(ref(db,`signals/${myId}/answers/${vid}`)).catch(()=>{});
+    }
+  };
 }
 
 /* ── JOIN ── */
 window.openJoinModal  = () => document.getElementById("join-modal").classList.remove("hidden");
 window.closeJoinModal = () => document.getElementById("join-modal").classList.add("hidden");
-["inp-user","inp-task"].forEach(id=>{
-  document.getElementById(id).addEventListener("keydown",e=>{ if(e.key==="Enter") handleJoin(); });
-});
+["inp-user","inp-task"].forEach(id =>
+  document.getElementById(id).addEventListener("keydown", e => { if(e.key==="Enter") handleJoin(); })
+);
 
 window.handleJoin = async () => {
-  const username=document.getElementById("inp-user").value.trim();
-  const task=document.getElementById("inp-task").value.trim();
-  let ok=true;
-  document.getElementById("err-user").textContent="";
-  document.getElementById("err-task").textContent="";
-  if(!username){document.getElementById("err-user").textContent="⚠ 请输入用户名";ok=false;}
-  if(!task){document.getElementById("err-task").textContent="⚠ 请输入今日任务";ok=false;}
+  const username = document.getElementById("inp-user").value.trim();
+  const task     = document.getElementById("inp-task").value.trim();
+  let ok = true;
+  document.getElementById("err-user").textContent = "";
+  document.getElementById("err-task").textContent = "";
+  if(!username){ document.getElementById("err-user").textContent="⚠ 请输入用户名"; ok=false; }
+  if(!task)    { document.getElementById("err-task").textContent="⚠ 请输入今日任务"; ok=false; }
   if(!ok) return;
 
-  const btn=document.getElementById("confirm-btn");
+  const btn = document.getElementById("confirm-btn");
   btn.textContent="进入中…"; btn.disabled=true;
-  try{
-    myId=uid(); joinTime=Date.now(); myRef=ref(db,`members/${myId}`);
-    meData={username,task,joinTime,lastSeen:Date.now(),sharing:false};
-    await set(myRef,meData);
-    heartTimer=setInterval(async()=>{ try{await set(myRef,{...meData,lastSeen:Date.now()});}catch{} },3000);
-    elapsedTimer=setInterval(()=>{ document.getElementById("my-el").textContent="⏱ "+fmt(Date.now()-joinTime); },1000);
+  try {
+    myId = uid(); joinTime = Date.now();
+    myRef = ref(db, `members/${myId}`);
+    meData = { username, task, joinTime, lastSeen: Date.now(), sharing: false };
+    await set(myRef, meData);
+
+    heartTimer = setInterval(async () => {
+      try { meData.lastSeen = Date.now(); await set(myRef, meData); } catch{}
+    }, 3000);
+
+    elapsedTimer = setInterval(() => {
+      document.getElementById("my-el").textContent = "⏱ " + fmt(Date.now() - joinTime);
+    }, 1000);
 
     closeJoinModal();
-    document.getElementById("lobby").style.display="none";
-    document.getElementById("room").style.display="flex";
-    document.getElementById("leave-btn").style.display="block";
-    document.getElementById("my-av").textContent=av(username);
-    document.getElementById("my-name").textContent=username;
-    document.getElementById("my-tv").textContent=task;
+    document.getElementById("lobby").style.display = "none";
+    document.getElementById("room").style.display  = "flex";
+    document.getElementById("leave-btn").style.display = "block";
+    document.getElementById("my-av").textContent   = av(username);
+    document.getElementById("my-name").textContent = username;
+    document.getElementById("my-tv").textContent   = task;
 
-    listenSignals();
-    window.addEventListener("beforeunload",()=>{ remove(myRef); cleanAll(); });
+    listenAsSharer();
+    window.addEventListener("beforeunload", () => { remove(myRef); cleanAll(); });
 
-    // connect previews for already-sharing members
-    Object.entries(allMembers).forEach(([id,m])=>{
-      if(id!==myId && m.sharing) connectPreview(id);
+    // connect thumbnails for anyone already sharing
+    Object.entries(allMembers).forEach(([id,m]) => {
+      if(id !== myId && m.sharing) startThumbnail(id);
     });
-  } catch(e){ showToast("进入失败："+e.message); }
-  finally{ btn.textContent="进入自习室 →"; btn.disabled=false; }
+  } catch(e) {
+    showToast("进入失败: " + e.message);
+  } finally {
+    btn.textContent="进入自习室 →"; btn.disabled=false;
+  }
 };
 
-/* ── SCREEN SHARE TOGGLE ── */
+/* ── SCREEN SHARE ── */
 window.toggleShare = async () => {
-  const sw=document.getElementById("tog-sw"), desc=document.getElementById("tog-desc");
-  if(localStream){
+  const sw = document.getElementById("tog-sw"), desc = document.getElementById("tog-desc");
+  if(localStream) {
     localStream.getTracks().forEach(t=>t.stop()); localStream=null;
     sw.classList.remove("on"); desc.textContent="开启后他人可实时查看";
     meData.sharing=false;
-    try{await set(myRef,{...meData,lastSeen:Date.now()});}catch{}
+    // close all sharer connections
+    Object.values(sharerConns).forEach(pc=>{try{pc.close();}catch{}});
+    sharerConns={};
+    try{ meData.lastSeen=Date.now(); await set(myRef,meData); }catch{}
   } else {
-    try{
-      localStream=await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
-      localStream.getVideoTracks()[0].addEventListener("ended",()=>{
+    try {
+      localStream = await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
+      localStream.getVideoTracks()[0].addEventListener("ended", () => {
         localStream=null; sw.classList.remove("on"); desc.textContent="开启后他人可实时查看";
-        meData.sharing=false; set(myRef,{...meData,lastSeen:Date.now()}).catch(()=>{});
+        Object.values(sharerConns).forEach(pc=>{try{pc.close();}catch{}});
+        sharerConns={};
+        meData.sharing=false; meData.lastSeen=Date.now();
+        set(myRef,meData).catch(()=>{});
       });
       sw.classList.add("on"); desc.textContent="屏幕共享已开启 🟢";
-      meData.sharing=true;
-      try{await set(myRef,{...meData,lastSeen:Date.now()});}catch{}
-    }catch{ localStream=null; sw.classList.remove("on"); }
+      meData.sharing=true; meData.lastSeen=Date.now();
+      try{ await set(myRef,meData); }catch{}
+    } catch { localStream=null; sw.classList.remove("on"); }
   }
 };
 
 /* ── LEAVE ── */
 window.handleLeave = async () => {
   clearInterval(heartTimer); clearInterval(elapsedTimer);
+  if(localStream){ localStream.getTracks().forEach(t=>t.stop()); localStream=null; }
   cleanAll();
-  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null;}
+  if(myRef) await remove(myRef);
+  myId=null; myRef=null; joinTime=null; meData={};
   document.getElementById("tog-sw").classList.remove("on");
   document.getElementById("tog-desc").textContent="开启后他人可实时查看";
-  if(myRef) await remove(myRef);
-  myId=null;myRef=null;joinTime=null;meData={};
-  document.getElementById("room").style.display="none";
-  document.getElementById("lobby").style.display="flex";
-  document.getElementById("leave-btn").style.display="none";
-  document.getElementById("my-el").textContent="⏱ 0s";
+  document.getElementById("room").style.display  = "none";
+  document.getElementById("lobby").style.display = "flex";
+  document.getElementById("leave-btn").style.display = "none";
+  document.getElementById("my-el").textContent = "⏱ 0s";
+  document.getElementById("room-grid").innerHTML = "";
 };
 
-/* ── DETAIL MODAL (fullscreen) ── */
-window.openDetail = async (id, m) => {
+/* ── DETAIL MODAL ── */
+window.openDetail = (id, m) => {
   if(!m) return;
-  viewingId=id;
-  document.getElementById("d-av").textContent=av(m.username);
-  document.getElementById("d-name").textContent=m.username;
-  document.getElementById("d-task").textContent="📌 "+m.task;
-  document.getElementById("d-el").textContent="已学习 "+fmt(Date.now()-m.joinTime);
+  viewingId = id;
+  document.getElementById("d-av").textContent   = av(m.username);
+  document.getElementById("d-name").textContent = m.username;
+  document.getElementById("d-task").textContent = "📌 " + m.task;
+  document.getElementById("d-el").textContent   = "已学习 " + fmt(Date.now()-m.joinTime);
   clearInterval(detTimer);
-  detTimer=setInterval(()=>{ const c=allMembers[id]; if(c) document.getElementById("d-el").textContent="已学习 "+fmt(Date.now()-c.joinTime); },1000);
+  detTimer = setInterval(() => {
+    const c=allMembers[id]; if(c) document.getElementById("d-el").textContent="已学习 "+fmt(Date.now()-c.joinTime);
+  },1000);
 
-  const dv=document.getElementById("det-video");
-  const dp=document.getElementById("det-ph");
-  const dptxt=document.getElementById("det-ph-txt");
+  const dv=document.getElementById("det-video"), dp=document.getElementById("det-ph"), dptxt=document.getElementById("det-ph-txt");
   dv.style.display="none"; dv.srcObject=null; dp.style.display="flex";
   document.getElementById("det-overlay").classList.remove("hidden");
 
-  // reuse preview stream if already connected
-  const prev=previewConns[id];
-  if(prev && prev.stream){
-    dv.srcObject=prev.stream; dv.style.display="block"; dp.style.display="none";
-  } else if(m.sharing && myId){
+  const stream = viewerStreams[id];
+  if(stream) {
+    feedDetail(stream);
+  } else if(m.sharing) {
     dptxt.innerHTML='<div class="connecting"><div class="spin"></div> 正在连接…</div>';
-    // will be filled by preview ontrack
-  } else if(!m.sharing){
-    dptxt.textContent="该成员未开启屏幕共享";
   } else {
-    dptxt.textContent="请先进入自习室后再查看屏幕";
+    dptxt.textContent="该成员未开启屏幕共享";
   }
 };
+
+function feedDetail(stream) {
+  const dv=document.getElementById("det-video"), dp=document.getElementById("det-ph");
+  if(!dv) return;
+  dv.srcObject=stream; dv.style.display="block"; dp.style.display="none";
+}
 
 window.closeDetail = () => {
   clearInterval(detTimer);
@@ -694,49 +653,10 @@ window.closeDetail = () => {
   viewingId=null;
 };
 
-/* ── SIGNALS (sharer side) ── */
-function listenSignals(){
-  if(!myId) return;
-  onValue(ref(db,`signals/${myId}/from`),async snap=>{
-    const viewers=snap.val()||{};
-    for(const [vid,data] of Object.entries(viewers)){
-      if(!data.offer||peerConns[vid]||!localStream) continue;
-      await answerViewer(vid,data.offer);
-    }
-  });
-}
-
-async function answerViewer(vid,offerData){
-  const pc=new RTCPeerConnection(ICE); peerConns[vid]=pc;
-  localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
-  let ibuf=[];
-  pc.onicecandidate=e=>{
-    if(e.candidate){
-      set(ref(db,`signals/${myId}/from/${vid}/si/${ibuf.length}`),{c:e.candidate.toJSON()});
-      ibuf.push(1);
-    }
-  };
-  await pc.setRemoteDescription({sdp:offerData.sdp,type:offerData.type});
-  const answer=await pc.createAnswer();
-  await pc.setLocalDescription(answer);
-  await set(ref(db,`signals/${myId}/from/${vid}/answer`),{sdp:answer.sdp,type:answer.type});
-  onValue(ref(db,`signals/${myId}/from/${vid}/vi`),snap=>{
-    Object.values(snap.val()||{}).forEach(async c=>{
-      try{await pc.addIceCandidate(new RTCIceCandidate(c.c));}catch{}
-    });
-  });
-  pc.onconnectionstatechange=()=>{
-    if(["disconnected","failed","closed"].includes(pc.connectionState)){
-      pc.close(); delete peerConns[vid];
-      remove(ref(db,`signals/${myId}/from/${vid}`)).catch(()=>{});
-    }
-  };
-}
-
-function cleanAll(){
-  Object.values(peerConns).forEach(pc=>{try{pc.close();}catch{}});
-  peerConns={};
-  Object.keys(previewConns).forEach(id=>disconnectPreview(id));
+function cleanAll() {
+  Object.values(sharerConns).forEach(pc=>{try{pc.close();}catch{}});
+  sharerConns={};
+  Object.keys(viewerConns).forEach(id=>dropThumbnail(id));
   if(myId) remove(ref(db,`signals/${myId}`)).catch(()=>{});
 }
 </script>
