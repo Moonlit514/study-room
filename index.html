@@ -447,7 +447,8 @@ function renderRoom(){
 
   const newIds = new Set(others.map(([id])=>id));
 
-  // remove cards for gone members
+  // remove empty state and cards for gone members
+  grid.querySelectorAll(".empty-st").forEach(el=>el.remove());
   Object.keys(existing).forEach(id=>{ if(!newIds.has(id)) existing[id].remove(); });
 
   others.forEach(([id,m],i)=>{
