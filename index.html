@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>自习室 · Study Room</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Cinzel:wght@400;600&family=DM+Mono:wght@300;400&display=swap');
+
+:root {
+  --gold: rgba(210,168,68,1);
+  --gold-dim: rgba(210,168,68,0.18);
+  --gold-faint: rgba(210,168,68,0.07);
+  --ink: #0b0906;
+  --text: rgba(230,212,172,0.92);
+  --muted: rgba(180,158,110,0.5);
+  --green: rgba(72,200,120,0.85);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 15% 10%,#1c1508 0%,#0b0906 55%,#08070d 100%);}
+.glow{position:fixed;border-radius:50%;filter:blur(130px);pointer-events:none;z-index:0;}
+.g1{width:700px;height:500px;background:rgba(210,168,68,.055);top:-180px;left:-220px;}
+.g2{width:500px;height:400px;background:rgba(100,70,180,.04);bottom:-120px;right:-160px;}
+.g3{width:300px;height:300px;background:rgba(210,168,68,.03);bottom:20%;left:30%;}
+
+/* HEADER */
+.site-header{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:1.3rem 2.5rem;border-bottom:1px solid rgba(210,168,68,.07);}
+.brand{font-family:'Cinzel',serif;font-size:.8rem;color:rgba(210,168,68,.55);letter-spacing:.35em;display:flex;align-items:center;gap:.7rem;}
+.brand-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.5;}
+.hclock{text-align:center;}
+.htime{font-family:'DM Mono',monospace;font-size:1.5rem;color:rgba(220,190,110,.9);letter-spacing:.08em;line-height:1;}
+.hdate{font-size:.62rem;color:var(--muted);letter-spacing:.14em;margin-top:.25rem;}
+.leave-btn{display:none;background:transparent;border:1px solid rgba(220,90,70,.25);border-radius:1px;color:rgba(220,100,80,.6);font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;padding:.45rem .9rem;cursor:pointer;transition:all .3s;}
+.leave-btn:hover{border-color:rgba(220,90,70,.5);color:rgba(230,120,100,.9);background:rgba(220,90,70,.06);}
+
+/* LOBBY */
+#lobby{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:3rem 1.5rem 4rem;}
+.lobby-hero{text-align:center;margin-bottom:2.5rem;}
+.lobby-eye{font-size:.64rem;color:rgba(210,168,68,.42);letter-spacing:.3em;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:.8rem;}
+.lobby-eye::before,.lobby-eye::after{content:'';width:40px;height:1px;background:rgba(210,168,68,.18);}
+.lobby-title{font-family:'Cinzel',serif;font-size:2.2rem;font-weight:600;color:rgba(225,195,120,.95);letter-spacing:.15em;line-height:1.1;margin-bottom:.6rem;}
+.lobby-sub{font-size:.8rem;color:var(--muted);letter-spacing:.12em;}
+
+.count-badge{display:flex;align-items:center;gap:1.2rem;margin-bottom:2.5rem;padding:.9rem 1.8rem;border:1px solid var(--gold-dim);border-radius:2px;background:var(--gold-faint);}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(72,200,120,.5);animation:pg 2s ease-in-out infinite;}
+@keyframes pg{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
+.count-txt{font-family:'DM Mono',monospace;font-size:.9rem;color:rgba(210,190,140,.8);}
+.count-n{font-size:1.3rem;color:rgba(220,195,130,.95);margin:0 .15rem;}
+
+.lobby-grid{width:100%;max-width:820px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem;margin-bottom:3rem;}
+.lobby-card{background:rgba(18,14,8,.7);border:1px solid rgba(210,168,68,.1);border-radius:2px;padding:1.2rem 1.4rem;cursor:pointer;transition:all .28s;animation:cin .5s cubic-bezier(.16,1,.3,1) both;position:relative;overflow:hidden;}
+.lobby-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(210,168,68,.06),transparent);opacity:0;transition:opacity .3s;}
+.lobby-card:hover{border-color:rgba(210,168,68,.28);transform:translateY(-2px);}
+.lobby-card:hover::after{opacity:1;}
+@keyframes cin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.lc-top{display:flex;align-items:center;gap:.9rem;margin-bottom:.9rem;}
+.lc-av{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:1px solid rgba(210,168,68,.18);background:linear-gradient(135deg,rgba(210,168,68,.12),rgba(140,100,40,.08));}
+.lc-name{font-size:.95rem;font-weight:600;color:rgba(225,205,160,.9);}
+.lc-meta{display:flex;align-items:center;gap:.6rem;margin-top:.2rem;}
+.lc-time{font-family:'DM Mono',monospace;font-size:.66rem;color:var(--muted);}
+.lc-sbadge{font-size:.56rem;padding:.12rem .38rem;border-radius:1px;background:rgba(72,200,120,.1);border:1px solid rgba(72,200,120,.22);color:rgba(72,200,120,.75);}
+.lc-task{font-size:.78rem;color:rgba(180,158,110,.55);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lc-hint{font-size:.6rem;color:rgba(210,168,68,.28);letter-spacing:.1em;margin-top:.7rem;text-align:right;}
+.lobby-empty{grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);font-size:.82rem;letter-spacing:.1em;line-height:2;}
+
+.start-btn{padding:1.1rem 3.5rem;background:linear-gradient(135deg,rgba(210,155,50,.18),rgba(180,125,35,.08));border:1px solid rgba(210,168,68,.4);border-radius:1px;color:rgba(225,195,120,.95);font-family:'Cinzel',serif;font-size:.95rem;letter-spacing:.35em;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.start-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(210,168,68,.18),transparent);opacity:0;transition:opacity .3s;}
+.start-btn:hover::before{opacity:1;}
+.start-btn:hover{border-color:rgba(210,168,68,.7);box-shadow:0 0 30px rgba(210,155,50,.12);color:rgba(240,215,140,1);}
+
+/* JOIN MODAL */
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(8,6,4,.78);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fi .25s ease;}
+.overlay.hidden{display:none;}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.modal{width:100%;max-width:440px;background:rgba(18,14,8,.97);border:1px solid rgba(210,168,68,.18);border-radius:2px;padding:2.5rem 2.5rem 3rem;box-shadow:0 0 80px rgba(0,0,0,.7),inset 0 1px 0 rgba(210,168,68,.07);animation:mi .35s cubic-bezier(.16,1,.3,1);}
+@keyframes mi{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:none}}
+.modal-title{font-family:'Cinzel',serif;font-size:.95rem;font-weight:400;color:rgba(210,168,68,.8);letter-spacing:.3em;text-align:center;margin-bottom:.3rem;}
+.modal-sub{font-size:.68rem;color:var(--muted);text-align:center;letter-spacing:.12em;margin-bottom:2rem;}
+.field{margin-bottom:1.3rem;}
+.field label{font-size:.65rem;color:rgba(210,168,68,.5);letter-spacing:.2em;display:block;margin-bottom:.55rem;}
+.field input{width:100%;background:rgba(255,255,255,.025);border:1px solid rgba(210,168,68,.12);border-radius:1px;padding:.8rem 1rem;color:var(--text);font-family:'Noto Serif SC',serif;font-size:.9rem;outline:none;transition:border-color .3s,background .3s;}
+.field input::placeholder{color:rgba(180,150,100,.22);}
+.field input:focus{border-color:rgba(210,168,68,.38);background:rgba(210,168,68,.035);}
+.field-err{font-size:.65rem;color:rgba(220,100,80,.7);margin-top:.35rem;}
+
+.share-tog{display:flex;align-items:center;gap:1rem;padding:.85rem 1rem;border:1px solid rgba(210,168,68,.1);border-radius:1px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .3s;margin-bottom:1.3rem;user-select:none;}
+.share-tog:hover{border-color:rgba(210,168,68,.22);}
+.tog-icon{font-size:1.1rem;opacity:.7;}
+.tog-lbl{font-size:.82rem;color:rgba(210,190,150,.8);}
+.tog-desc{font-size:.65rem;color:var(--muted);margin-top:.15rem;}
+.tog-sw{width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(210,168,68,.15);position:relative;transition:all .3s;flex-shrink:0;}
+.tog-sw.on{background:rgba(210,168,68,.3);border-color:rgba(210,168,68,.5);}
+.tog-knob{width:14px;height:14px;border-radius:50%;background:rgba(180,150,100,.5);position:absolute;top:2px;left:2px;transition:all .3s;}
+.tog-sw.on .tog-knob{left:18px;background:rgba(220,185,110,.9);}
+
+.modal-btns{display:flex;gap:.8rem;margin-top:1.8rem;}
+.btn-cancel{flex:1;padding:.85rem;background:transparent;border:1px solid rgba(210,168,68,.12);border-radius:1px;color:var(--muted);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;cursor:pointer;transition:all .3s;}
+.btn-cancel:hover{border-color:rgba(210,168,68,.25);color:rgba(200,180,130,.7);}
+.btn-confirm{flex:2;padding:.85rem;background:linear-gradient(135deg,rgba(210,155,50,.16),rgba(180,125,35,.08));border:1px solid rgba(210,168,68,.35);border-radius:1px;color:rgba(220,190,115,.9);font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.25em;cursor:pointer;transition:all .3s;}
+.btn-confirm:hover{border-color:rgba(210,168,68,.6);color:rgba(240,210,130,1);}
+
+/* ROOM */
+#room{display:none;position:relative;z-index:1;flex-direction:column;}
+.room-body{flex:1;display:grid;grid-template-columns:300px 1fr;gap:2rem;max-width:1150px;margin:0 auto;width:100%;padding:2rem 2rem 3rem;}
+
+.panel-lbl{font-size:.62rem;color:rgba(210,168,68,.42);letter-spacing:.25em;margin-bottom:1.1rem;display:flex;align-items:center;gap:.7rem;}
+.panel-lbl::after{content:'';flex:1;height:1px;background:rgba(210,168,68,.08);}
+
+.my-panel{position:sticky;top:2rem;align-self:start;}
+.my-card{background:rgba(210,168,68,.04);border:1px solid rgba(210,168,68,.14);border-radius:2px;padding:1.7rem;position:relative;overflow:hidden;}
+.my-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,rgba(210,168,68,.7),rgba(210,168,68,.08));}
+.my-av{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,rgba(210,155,50,.25),rgba(180,125,40,.12));border:1px solid rgba(210,168,68,.28);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:.95rem;}
+.my-name{font-size:1.05rem;font-weight:600;color:rgba(228,205,152,.95);margin-bottom:.25rem;}
+.my-el{font-family:'DM Mono',monospace;font-size:.82rem;color:rgba(210,168,68,.65);margin-bottom:1.1rem;}
+.my-tl{font-size:.6rem;color:var(--muted);letter-spacing:.18em;margin-bottom:.38rem;}
+.my-tv{font-size:.88rem;color:rgba(208,182,136,.75);line-height:1.6;padding:.75rem;background:rgba(0,0,0,.18);border-radius:1px;border-left:2px solid rgba(210,168,68,.18);}
+.my-share-st{margin-top:1rem;font-size:.68rem;color:var(--muted);display:none;align-items:center;gap:.5rem;}
+.share-on-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(72,200,120,.5);}
+
+.mems-hdr{display:flex;align-items:center;margin-bottom:1.1rem;}
+.mems-cnt{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);margin-left:.4rem;}
+.mems-grid{display:flex;flex-direction:column;gap:.85rem;}
+.mem-card{background:rgba(14,11,7,.65);border:1px solid rgba(210,168,68,.08);border-radius:2px;padding:1.3rem 1.5rem;display:flex;align-items:flex-start;gap:1.1rem;cursor:pointer;transition:all .28s;animation:cin .45s cubic-bezier(.16,1,.3,1) both;}
+.mem-card:hover{border-color:rgba(210,168,68,.2);background:rgba(210,168,68,.03);transform:translateX(3px);}
+.mem-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;border:1px solid rgba(210,168,68,.14);background:linear-gradient(135deg,rgba(100,80,180,.14),rgba(60,50,120,.08));}
+.mem-info{flex:1;min-width:0;}
+.mc-name{font-size:.92rem;font-weight:600;color:rgba(210,188,148,.88);margin-bottom:.18rem;}
+.mc-meta{display:flex;align-items:center;gap:.8rem;margin-bottom:.65rem;}
+.mc-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(72,200,120,.4);animation:pg 2s infinite;}
+.mc-time{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);}
+.mc-sb{font-size:.6rem;padding:.12rem .38rem;border-radius:1px;background:rgba(72,200,120,.1);border:1px solid rgba(72,200,120,.22);color:rgba(72,200,120,.75);}
+.mc-task{font-size:.8rem;color:rgba(175,152,108,.55);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mc-hint{font-size:.6rem;color:rgba(210,168,68,.25);margin-top:.5rem;text-align:right;}
+.empty-st{text-align:center;padding:4rem 2rem;color:var(--muted);}
+.empty-ico{font-size:2.2rem;margin-bottom:.9rem;opacity:.35;}
+.empty-txt{font-size:.82rem;letter-spacing:.08em;line-height:1.9;}
+
+/* DETAIL MODAL */
+.det-overlay{position:fixed;inset:0;z-index:200;background:rgba(6,5,3,.82);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fi .25s ease;}
+.det-overlay.hidden{display:none;}
+.det-modal{width:100%;max-width:700px;max-height:90vh;overflow-y:auto;background:rgba(16,12,7,.97);border:1px solid rgba(210,168,68,.15);border-radius:2px;padding:2rem 2.5rem 2.5rem;box-shadow:0 0 100px rgba(0,0,0,.8);animation:mi .35s cubic-bezier(.16,1,.3,1);}
+.det-close{float:right;background:transparent;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;transition:color .2s;line-height:1;}
+.det-close:hover{color:var(--text);}
+.det-hdr{display:flex;align-items:center;gap:1.2rem;margin-bottom:2rem;clear:both;}
+.det-av{width:60px;height:60px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:1px solid rgba(210,168,68,.22);background:linear-gradient(135deg,rgba(210,155,50,.2),rgba(180,125,40,.1));}
+.det-name{font-size:1.25rem;font-weight:600;color:rgba(228,205,152,.95);margin-bottom:.3rem;}
+.det-el{font-family:'DM Mono',monospace;font-size:.85rem;color:rgba(210,168,68,.65);}
+.det-tl{font-size:.62rem;color:var(--muted);letter-spacing:.18em;margin-bottom:.4rem;margin-top:1.2rem;}
+.det-tv{font-size:.9rem;color:rgba(205,180,132,.75);line-height:1.7;padding:.9rem 1rem;background:rgba(0,0,0,.2);border-radius:1px;border-left:2px solid rgba(210,168,68,.18);margin-bottom:1.5rem;}
+.screen-ttl{font-size:.65rem;color:rgba(210,168,68,.45);letter-spacing:.25em;margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem;}
+.screen-ttl::after{content:'';flex:1;height:1px;background:rgba(210,168,68,.08);}
+.screen-view{width:100%;aspect-ratio:16/9;border-radius:1px;background:rgba(0,0,0,.5);border:1px solid rgba(210,168,68,.1);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+.screen-view video{width:100%;height:100%;object-fit:contain;display:none;}
+.screen-ph{text-align:center;color:var(--muted);}
+.screen-ph-ico{font-size:2rem;opacity:.3;margin-bottom:.6rem;}
+.screen-ph-txt{font-size:.75rem;letter-spacing:.08em;line-height:1.8;}
+.connecting{font-size:.72rem;color:rgba(210,168,68,.5);letter-spacing:.1em;display:flex;align-items:center;gap:.6rem;}
+.spin{width:12px;height:12px;border:1.5px solid rgba(210,168,68,.2);border-top-color:rgba(210,168,68,.7);border-radius:50%;animation:sp .8s linear infinite;}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.hidden{display:none!important;}
+
+@media(max-width:750px){
+  .room-body{grid-template-columns:1fr;padding:1.2rem 1rem 2rem;}
+  .site-header{padding:1rem 1.2rem;}
+  .det-modal{padding:1.5rem 1.2rem 2rem;}
+  .modal{padding:2rem 1.5rem 2.5rem;}
+  .lobby-title{font-size:1.6rem;}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<div class="glow g3"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="brand"><div class="brand-dot"></div>STUDY ROOM<div class="brand-dot"></div></div>
+  <div class="hclock">
+    <div class="htime" id="htime">--:--</div>
+    <div class="hdate" id="hdate"></div>
+  </div>
+  <div style="min-width:120px;display:flex;justify-content:flex-end;">
+    <button class="leave-btn" id="leave-btn" onclick="handleLeave()">离开自习室</button>
+  </div>
+</header>
+
+<!-- LOBBY -->
+<div id="lobby">
+  <div class="lobby-hero">
+    <div class="lobby-eye">OPEN STUDY SESSION</div>
+    <div class="lobby-title">自习室</div>
+    <div class="lobby-sub">专注当下，与同行者共进</div>
+  </div>
+  <div class="count-badge">
+    <div class="live-dot"></div>
+    <div class="count-txt">当前在线 <span class="count-n" id="lobby-count">0</span> 人正在自习</div>
+  </div>
+  <div class="lobby-grid" id="lobby-grid">
+    <div class="lobby-empty" id="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div>
+  </div>
+  <button class="start-btn" onclick="openJoinModal()">开始自习</button>
+</div>
+
+<!-- JOIN MODAL -->
+<div class="overlay hidden" id="join-modal">
+  <div class="modal">
+    <div class="modal-title">进入自习室</div>
+    <div class="modal-sub">告诉大家你是谁，今天要做什么</div>
+    <div class="field">
+      <label>用户名</label>
+      <input id="inp-user" placeholder="你想被叫什么？"/>
+      <div class="field-err" id="err-user"></div>
+    </div>
+    <div class="field">
+      <label>今日任务</label>
+      <input id="inp-task" placeholder="今天要专注什么？"/>
+      <div class="field-err" id="err-task"></div>
+    </div>
+    <div class="share-tog" onclick="toggleShare()">
+      <div class="tog-icon">🖥️</div>
+      <div style="flex:1;">
+        <div class="tog-lbl">共享我的屏幕</div>
+        <div class="tog-desc">其他人可以在你的资料页看到你的屏幕</div>
+      </div>
+      <div class="tog-sw" id="tog-sw"><div class="tog-knob"></div></div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeJoinModal()">取消</button>
+      <button class="btn-confirm" onclick="handleJoin()">进入自习室 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROOM -->
+<div id="room">
+  <div class="room-body">
+    <div class="my-panel">
+      <div class="panel-lbl">我的状态</div>
+      <div class="my-card">
+        <div class="my-av" id="my-av">🧑‍💻</div>
+        <div class="my-name" id="my-name"></div>
+        <div class="my-el" id="my-el">⏱ 0s</div>
+        <div class="my-tl">当前任务</div>
+        <div class="my-tv" id="my-tv"></div>
+        <div class="my-share-st" id="my-share-st"><div class="share-on-dot"></div><span>屏幕共享已开启</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="mems-hdr">
+        <div class="panel-lbl" style="margin-bottom:0;flex:1;">自习室成员 <span class="mems-cnt" id="room-cnt">(0 人)</span></div>
+      </div>
+      <div class="mems-grid" id="room-grid">
+        <div class="empty-st"><div class="empty-ico">🌙</div><div class="empty-txt">自习室目前只有你<br>把链接分享给朋友，一起专注吧</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="det-overlay hidden" id="det-overlay">
+  <div class="det-modal">
+    <button class="det-close" onclick="closeDetail()">✕</button>
+    <div class="det-hdr">
+      <div class="det-av" id="d-av">👤</div>
+      <div>
+        <div class="det-name" id="d-name"></div>
+        <div class="det-el" id="d-el"></div>
+      </div>
+    </div>
+    <div class="det-tl">正在专注</div>
+    <div class="det-tv" id="d-tv"></div>
+    <div class="screen-ttl">实时屏幕</div>
+    <div class="screen-view" id="screen-view">
+      <div class="screen-ph" id="screen-ph">
+        <div class="screen-ph-ico">🖥️</div>
+        <div class="screen-ph-txt" id="screen-ph-txt">该成员未开启屏幕共享</div>
+      </div>
+      <video id="screen-video" autoplay playsinline></video>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, remove }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+// 🔧 替换成你的 Firebase 配置
+const firebaseConfig = {
+  apiKey:            "YOUR_API_KEY",
+  authDomain:        "YOUR_PROJECT.firebaseapp.com",
+  databaseURL:       "https://YOUR_PROJECT-default-rtdb.firebaseio.com",
+  projectId:         "YOUR_PROJECT",
+  storageBucket:     "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId:             "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+
+/* STATE */
+let myId=null,myRef=null,joinTime=null,wantShare=false;
+let localStream=null,peerConns={},viewerConn=null,viewingId=null;
+let heartTimer=null,elapsedTimer=null,detTimer=null;
+let allMembers={};
+
+/* UTILS */
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const fmt=ms=>{const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;return h>0?`${h}h ${m}m ${sec}s`:m>0?`${m}m ${sec}s`:`${sec}s`;};
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const AVS=["👩‍💻","👨‍🎓","🧑‍🎨","👩‍🔬","🧑‍💼","👨‍🏫","🧑‍🚀","👩‍🎤","🧑‍🔬","👨‍💻","🧑‍🍳","👨‍🎨"];
+const av=n=>AVS[n.charCodeAt(0)%AVS.length];
+
+/* CLOCK */
+const tick=()=>{
+  const n=new Date();
+  document.getElementById("htime").textContent=n.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"});
+  document.getElementById("hdate").textContent=n.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"short"});
+};
+tick(); setInterval(tick,1000);
+
+/* LISTEN MEMBERS */
+onValue(ref(db,"members"),snap=>{
+  const raw=snap.val()||{},now=Date.now();
+  allMembers={};
+  Object.entries(raw).forEach(([id,m])=>{ if(now-m.lastSeen<9000) allMembers[id]=m; });
+  renderLobby();
+  if(myId) renderRoom();
+});
+
+function renderLobby(){
+  const others=Object.entries(allMembers).filter(([id])=>id!==myId);
+  document.getElementById("lobby-count").textContent=others.length;
+  const grid=document.getElementById("lobby-grid");
+  if(others.length===0){
+    grid.innerHTML='<div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div>';
+    return;
+  }
+  grid.innerHTML=others.map(([id,m],i)=>`
+    <div class="lobby-card" style="animation-delay:${i*.06}s" data-id="${id}">
+      <div class="lc-top">
+        <div class="lc-av">${av(m.username)}</div>
+        <div>
+          <div class="lc-name">${esc(m.username)}</div>
+          <div class="lc-meta">
+            <span class="lc-time">⏱ ${fmt(Date.now()-m.joinTime)}</span>
+            ${m.sharing?'<span class="lc-sbadge">📺 共享中</span>':""}
+          </div>
+        </div>
+      </div>
+      <div class="lc-task">${esc(m.task)}</div>
+      <div class="lc-hint">点击查看详情 →</div>
+    </div>
+  `).join("");
+  grid.querySelectorAll(".lobby-card").forEach(el=>{
+    const id=el.dataset.id;
+    el.onclick=()=>openDetail(id,allMembers[id]);
+  });
+}
+
+function renderRoom(){
+  const others=Object.entries(allMembers).filter(([id])=>id!==myId);
+  document.getElementById("room-cnt").textContent=`(${others.length} 人)`;
+  const grid=document.getElementById("room-grid");
+  if(others.length===0){
+    grid.innerHTML='<div class="empty-st"><div class="empty-ico">🌙</div><div class="empty-txt">自习室目前只有你<br>把链接分享给朋友，一起专注吧</div></div>';
+    return;
+  }
+  grid.innerHTML=others.map(([id,m],i)=>`
+    <div class="mem-card" style="animation-delay:${i*.05}s" data-id="${id}">
+      <div class="mem-av">${av(m.username)}</div>
+      <div class="mem-info">
+        <div class="mc-name">${esc(m.username)}</div>
+        <div class="mc-meta">
+          <div class="mc-dot"></div>
+          <span class="mc-time">已学习 ${fmt(Date.now()-m.joinTime)}</span>
+          ${m.sharing?'<span class="mc-sb">📺 共享中</span>':""}
+        </div>
+        <div class="mc-task">${esc(m.task)}</div>
+        <div class="mc-hint">点击查看详情 →</div>
+      </div>
+    </div>
+  `).join("");
+  grid.querySelectorAll(".mem-card").forEach(el=>{
+    const id=el.dataset.id;
+    el.onclick=()=>openDetail(id,allMembers[id]);
+  });
+}
+
+/* JOIN MODAL */
+window.openJoinModal=()=>document.getElementById("join-modal").classList.remove("hidden");
+window.closeJoinModal=()=>document.getElementById("join-modal").classList.add("hidden");
+window.toggleShare=()=>{
+  wantShare=!wantShare;
+  document.getElementById("tog-sw").classList.toggle("on",wantShare);
+};
+["inp-user","inp-task"].forEach(id=>{
+  document.getElementById(id).addEventListener("keydown",e=>{ if(e.key==="Enter") handleJoin(); });
+});
+
+window.handleJoin=async()=>{
+  const username=document.getElementById("inp-user").value.trim();
+  const task=document.getElementById("inp-task").value.trim();
+  let ok=true;
+  document.getElementById("err-user").textContent="";
+  document.getElementById("err-task").textContent="";
+  if(!username){document.getElementById("err-user").textContent="⚠ 请输入用户名";ok=false;}
+  if(!task){document.getElementById("err-task").textContent="⚠ 请输入今日任务";ok=false;}
+  if(!ok) return;
+
+  if(wantShare){
+    try{
+      localStream=await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
+      localStream.getVideoTracks()[0].addEventListener("ended",stopSharing);
+    }catch{wantShare=false;document.getElementById("tog-sw").classList.remove("on");}
+  }
+
+  myId=uid(); joinTime=Date.now(); myRef=ref(db,`members/${myId}`);
+  const me={username,task,joinTime,lastSeen:Date.now(),sharing:!!localStream};
+  await set(myRef,me);
+
+  heartTimer=setInterval(async()=>{
+    try{await set(myRef,{...me,lastSeen:Date.now(),sharing:!!localStream});}catch{}
+  },3000);
+  elapsedTimer=setInterval(()=>{
+    document.getElementById("my-el").textContent="⏱ "+fmt(Date.now()-joinTime);
+  },1000);
+
+  closeJoinModal();
+  document.getElementById("lobby").style.display="none";
+  document.getElementById("room").style.display="flex";
+  document.getElementById("leave-btn").style.display="block";
+  document.getElementById("my-av").textContent=av(username);
+  document.getElementById("my-name").textContent=username;
+  document.getElementById("my-tv").textContent=task;
+  if(localStream) document.getElementById("my-share-st").style.display="flex";
+
+  listenSignals();
+  window.addEventListener("beforeunload",()=>{remove(myRef);cleanRTC();});
+};
+
+function stopSharing(){
+  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null;}
+  document.getElementById("my-share-st").style.display="none";
+  wantShare=false;
+}
+
+window.handleLeave=async()=>{
+  clearInterval(heartTimer);clearInterval(elapsedTimer);
+  cleanRTC();stopSharing();
+  if(myRef) await remove(myRef);
+  myId=null;myRef=null;joinTime=null;
+  document.getElementById("room").style.display="none";
+  document.getElementById("lobby").style.display="flex";
+  document.getElementById("leave-btn").style.display="none";
+  document.getElementById("my-el").textContent="⏱ 0s";
+};
+
+/* DETAIL MODAL */
+window.openDetail=async(id,m)=>{
+  if(!m) return;
+  viewingId=id;
+  document.getElementById("d-av").textContent=av(m.username);
+  document.getElementById("d-name").textContent=m.username;
+  document.getElementById("d-tv").textContent=m.task;
+  document.getElementById("d-el").textContent="已学习 "+fmt(Date.now()-m.joinTime);
+  clearInterval(detTimer);
+  detTimer=setInterval(()=>{
+    const cur=allMembers[id];
+    if(cur) document.getElementById("d-el").textContent="已学习 "+fmt(Date.now()-cur.joinTime);
+  },1000);
+
+  const video=document.getElementById("screen-video");
+  const ph=document.getElementById("screen-ph");
+  const phtxt=document.getElementById("screen-ph-txt");
+  video.style.display="none";video.srcObject=null;ph.style.display="flex";
+
+  document.getElementById("det-overlay").classList.remove("hidden");
+
+  if(m.sharing && myId){
+    phtxt.innerHTML='<div class="connecting"><div class="spin"></div> 正在连接屏幕…</div>';
+    await startViewing(id);
+  } else if(!m.sharing){
+    phtxt.textContent="该成员未开启屏幕共享";
+  } else {
+    phtxt.textContent="请先进入自习室后再查看屏幕";
+  }
+};
+
+window.closeDetail=()=>{
+  clearInterval(detTimer);
+  document.getElementById("det-overlay").classList.add("hidden");
+  const video=document.getElementById("screen-video");
+  video.srcObject=null;video.style.display="none";
+  document.getElementById("screen-ph").style.display="flex";
+  if(viewerConn){viewerConn.close();viewerConn=null;}
+  if(myId&&viewingId) remove(ref(db,`signals/${viewingId}/from/${myId}`)).catch(()=>{});
+  viewingId=null;
+};
+
+/* WebRTC */
+const ICE={iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}]};
+
+async function startViewing(sharerId){
+  if(viewerConn){viewerConn.close();viewerConn=null;}
+  const pc=new RTCPeerConnection(ICE); viewerConn=pc;
+  pc.addTransceiver("video",{direction:"recvonly"});
+  pc.ontrack=e=>{
+    const v=document.getElementById("screen-video"),ph=document.getElementById("screen-ph");
+    v.srcObject=e.streams[0];v.style.display="block";ph.style.display="none";
+  };
+  let ibuf=[];
+  pc.onicecandidate=e=>{
+    if(e.candidate){
+      set(ref(db,`signals/${sharerId}/from/${myId}/vi/${ibuf.length}`),{c:e.candidate.toJSON()});
+      ibuf.push(1);
+    }
+  };
+  const offer=await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  await set(ref(db,`signals/${sharerId}/from/${myId}/offer`),{sdp:offer.sdp,type:offer.type});
+
+  const ansRef=ref(db,`signals/${sharerId}/from/${myId}/answer`);
+  const unsub=onValue(ansRef,async snap=>{
+    if(!snap.val()||pc.signalingState!=="have-local-offer") return;
+    await pc.setRemoteDescription(snap.val()); unsub();
+  });
+  onValue(ref(db,`signals/${sharerId}/from/${myId}/si`),snap=>{
+    Object.values(snap.val()||{}).forEach(async c=>{
+      try{await pc.addIceCandidate(new RTCIceCandidate(c.c));}catch{}
+    });
+  });
+}
+
+function listenSignals(){
+  if(!myId) return;
+  onValue(ref(db,`signals/${myId}/from`),async snap=>{
+    const viewers=snap.val()||{};
+    for(const [vid,data] of Object.entries(viewers)){
+      if(!data.offer||peerConns[vid]||!localStream) continue;
+      await answerViewer(vid,data.offer);
+    }
+  });
+}
+
+async function answerViewer(vid,offerData){
+  const pc=new RTCPeerConnection(ICE); peerConns[vid]=pc;
+  localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
+  let ibuf=[];
+  pc.onicecandidate=e=>{
+    if(e.candidate){
+      set(ref(db,`signals/${myId}/from/${vid}/si/${ibuf.length}`),{c:e.candidate.toJSON()});
+      ibuf.push(1);
+    }
+  };
+  await pc.setRemoteDescription({sdp:offerData.sdp,type:offerData.type});
+  const answer=await pc.createAnswer();
+  await pc.setLocalDescription(answer);
+  await set(ref(db,`signals/${myId}/from/${vid}/answer`),{sdp:answer.sdp,type:answer.type});
+  onValue(ref(db,`signals/${myId}/from/${vid}/vi`),snap=>{
+    Object.values(snap.val()||{}).forEach(async c=>{
+      try{await pc.addIceCandidate(new RTCIceCandidate(c.c));}catch{}
+    });
+  });
+  pc.onconnectionstatechange=()=>{
+    if(["disconnected","failed","closed"].includes(pc.connectionState)){
+      pc.close();delete peerConns[vid];
+      remove(ref(db,`signals/${myId}/from/${vid}`)).catch(()=>{});
+    }
+  };
+}
+
+function cleanRTC(){
+  Object.values(peerConns).forEach(pc=>{try{pc.close();}catch{}});
+  peerConns={};
+  if(viewerConn){try{viewerConn.close();}catch{} viewerConn=null;}
+  if(myId) remove(ref(db,`signals/${myId}`)).catch(()=>{});
+}
+</script>
+</body>
+</html>
