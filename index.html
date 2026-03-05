@@ -26,6 +26,7 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 .g2{width:500px;height:400px;background:rgba(100,70,180,.04);bottom:-120px;right:-160px;}
 .g3{width:300px;height:300px;background:rgba(210,168,68,.03);bottom:20%;left:30%;}
 
+/* HEADER */
 .site-header{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:1.3rem 2.5rem;border-bottom:1px solid rgba(210,168,68,.07);}
 .brand{font-family:'Cinzel',serif;font-size:.8rem;color:rgba(210,168,68,.55);letter-spacing:.35em;display:flex;align-items:center;gap:.7rem;}
 .brand-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.5;}
@@ -81,8 +82,30 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 .field input::placeholder{color:rgba(180,150,100,.22);}
 .field input:focus{border-color:rgba(210,168,68,.38);background:rgba(210,168,68,.035);}
 .field-err{font-size:.65rem;color:rgba(220,100,80,.7);margin-top:.35rem;}
+.modal-btns{display:flex;gap:.8rem;margin-top:1.8rem;}
+.btn-cancel{flex:1;padding:.85rem;background:transparent;border:1px solid rgba(210,168,68,.12);border-radius:1px;color:var(--muted);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;cursor:pointer;transition:all .3s;}
+.btn-cancel:hover{border-color:rgba(210,168,68,.25);color:rgba(200,180,130,.7);}
+.btn-confirm{flex:2;padding:.85rem;background:linear-gradient(135deg,rgba(210,155,50,.16),rgba(180,125,35,.08));border:1px solid rgba(210,168,68,.35);border-radius:1px;color:rgba(220,190,115,.9);font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.25em;cursor:pointer;transition:all .3s;}
+.btn-confirm:hover{border-color:rgba(210,168,68,.6);color:rgba(240,210,130,1);}
 
-/* screen share toggle — shown INSIDE room now, not in modal */
+/* ROOM */
+#room{display:none;position:relative;z-index:1;flex-direction:column;}
+.room-body{flex:1;display:grid;grid-template-columns:280px 1fr;gap:2rem;max-width:1200px;margin:0 auto;width:100%;padding:2rem 2rem 3rem;}
+
+.panel-lbl{font-size:.62rem;color:rgba(210,168,68,.42);letter-spacing:.25em;margin-bottom:1.1rem;display:flex;align-items:center;gap:.7rem;}
+.panel-lbl::after{content:'';flex:1;height:1px;background:rgba(210,168,68,.08);}
+
+/* MY PANEL */
+.my-panel{position:sticky;top:2rem;align-self:start;}
+.my-card{background:rgba(210,168,68,.04);border:1px solid rgba(210,168,68,.14);border-radius:2px;padding:1.7rem;position:relative;overflow:hidden;}
+.my-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,rgba(210,168,68,.7),rgba(210,168,68,.08));}
+.my-av{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,rgba(210,155,50,.25),rgba(180,125,40,.12));border:1px solid rgba(210,168,68,.28);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:.95rem;}
+.my-name{font-size:1.05rem;font-weight:600;color:rgba(228,205,152,.95);margin-bottom:.25rem;}
+.my-el{font-family:'DM Mono',monospace;font-size:.82rem;color:rgba(210,168,68,.65);margin-bottom:1.1rem;}
+.my-tl{font-size:.6rem;color:var(--muted);letter-spacing:.18em;margin-bottom:.38rem;}
+.my-tv{font-size:.88rem;color:rgba(208,182,136,.75);line-height:1.6;padding:.75rem;background:rgba(0,0,0,.18);border-radius:1px;border-left:2px solid rgba(210,168,68,.18);}
+
+/* share toggle */
 .share-tog{display:flex;align-items:center;gap:1rem;padding:.85rem 1rem;border:1px solid rgba(210,168,68,.1);border-radius:1px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .3s;user-select:none;margin-top:1rem;}
 .share-tog:hover{border-color:rgba(210,168,68,.22);}
 .tog-icon{font-size:1.1rem;opacity:.7;}
@@ -93,79 +116,95 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 .tog-knob{width:14px;height:14px;border-radius:50%;background:rgba(180,150,100,.5);position:absolute;top:2px;left:2px;transition:all .3s;}
 .tog-sw.on .tog-knob{left:18px;background:rgba(220,185,110,.9);}
 
-.modal-btns{display:flex;gap:.8rem;margin-top:1.8rem;}
-.btn-cancel{flex:1;padding:.85rem;background:transparent;border:1px solid rgba(210,168,68,.12);border-radius:1px;color:var(--muted);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;cursor:pointer;transition:all .3s;}
-.btn-cancel:hover{border-color:rgba(210,168,68,.25);color:rgba(200,180,130,.7);}
-.btn-confirm{flex:2;padding:.85rem;background:linear-gradient(135deg,rgba(210,155,50,.16),rgba(180,125,35,.08));border:1px solid rgba(210,168,68,.35);border-radius:1px;color:rgba(220,190,115,.9);font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.25em;cursor:pointer;transition:all .3s;}
-.btn-confirm:hover{border-color:rgba(210,168,68,.6);color:rgba(240,210,130,1);}
-
-/* ROOM */
-#room{display:none;position:relative;z-index:1;flex-direction:column;}
-.room-body{flex:1;display:grid;grid-template-columns:300px 1fr;gap:2rem;max-width:1150px;margin:0 auto;width:100%;padding:2rem 2rem 3rem;}
-.panel-lbl{font-size:.62rem;color:rgba(210,168,68,.42);letter-spacing:.25em;margin-bottom:1.1rem;display:flex;align-items:center;gap:.7rem;}
-.panel-lbl::after{content:'';flex:1;height:1px;background:rgba(210,168,68,.08);}
-.my-panel{position:sticky;top:2rem;align-self:start;}
-.my-card{background:rgba(210,168,68,.04);border:1px solid rgba(210,168,68,.14);border-radius:2px;padding:1.7rem;position:relative;overflow:hidden;}
-.my-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,rgba(210,168,68,.7),rgba(210,168,68,.08));}
-.my-av{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,rgba(210,155,50,.25),rgba(180,125,40,.12));border:1px solid rgba(210,168,68,.28);display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:.95rem;}
-.my-name{font-size:1.05rem;font-weight:600;color:rgba(228,205,152,.95);margin-bottom:.25rem;}
-.my-el{font-family:'DM Mono',monospace;font-size:.82rem;color:rgba(210,168,68,.65);margin-bottom:1.1rem;}
-.my-tl{font-size:.6rem;color:var(--muted);letter-spacing:.18em;margin-bottom:.38rem;}
-.my-tv{font-size:.88rem;color:rgba(208,182,136,.75);line-height:1.6;padding:.75rem;background:rgba(0,0,0,.18);border-radius:1px;border-left:2px solid rgba(210,168,68,.18);}
-.share-on-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(72,200,120,.5);}
-.share-active-txt{font-size:.68rem;color:rgba(72,200,120,.7);}
-
+/* MEMBERS GRID — card layout */
+.mems-panel{}
 .mems-hdr{display:flex;align-items:center;margin-bottom:1.1rem;}
 .mems-cnt{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);margin-left:.4rem;}
-.mems-grid{display:flex;flex-direction:column;gap:.85rem;}
-.mem-card{background:rgba(14,11,7,.65);border:1px solid rgba(210,168,68,.08);border-radius:2px;padding:1.3rem 1.5rem;display:flex;align-items:flex-start;gap:1.1rem;cursor:pointer;transition:all .28s;animation:cin .45s cubic-bezier(.16,1,.3,1) both;}
-.mem-card:hover{border-color:rgba(210,168,68,.2);background:rgba(210,168,68,.03);transform:translateX(3px);}
-.mem-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;border:1px solid rgba(210,168,68,.14);background:linear-gradient(135deg,rgba(100,80,180,.14),rgba(60,50,120,.08));}
-.mem-info{flex:1;min-width:0;}
-.mc-name{font-size:.92rem;font-weight:600;color:rgba(210,188,148,.88);margin-bottom:.18rem;}
-.mc-meta{display:flex;align-items:center;gap:.8rem;margin-bottom:.65rem;}
-.mc-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(72,200,120,.4);animation:pg 2s infinite;}
-.mc-time{font-family:'DM Mono',monospace;font-size:.68rem;color:var(--muted);}
-.mc-sb{font-size:.6rem;padding:.12rem .38rem;border-radius:1px;background:rgba(72,200,120,.1);border:1px solid rgba(72,200,120,.22);color:rgba(72,200,120,.75);}
-.mc-task{font-size:.8rem;color:rgba(175,152,108,.55);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.mc-hint{font-size:.6rem;color:rgba(210,168,68,.25);margin-top:.5rem;text-align:right;}
-.empty-st{text-align:center;padding:4rem 2rem;color:var(--muted);}
+
+/* Members shown as cards in a grid */
+.mems-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;}
+
+.mem-card{background:rgba(14,11,7,.8);border:1px solid rgba(210,168,68,.1);border-radius:2px;overflow:hidden;transition:all .28s;animation:cin .45s cubic-bezier(.16,1,.3,1) both;}
+.mem-card:hover{border-color:rgba(210,168,68,.25);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.4);}
+
+/* Screen preview thumbnail */
+.mem-screen-preview{
+  width:100%;aspect-ratio:16/9;
+  background:rgba(0,0,0,.6);
+  position:relative;overflow:hidden;
+  cursor:pointer;
+}
+.mem-screen-preview video{width:100%;height:100%;object-fit:cover;display:block;}
+.mem-screen-placeholder{
+  width:100%;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--muted);gap:.5rem;
+}
+.mem-screen-placeholder-ico{font-size:1.5rem;opacity:.3;}
+.mem-screen-placeholder-txt{font-size:.68rem;letter-spacing:.08em;opacity:.6;}
+.mem-screen-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .25s;
+}
+.mem-screen-overlay:hover{background:rgba(0,0,0,.35);}
+.mem-screen-expand{
+  opacity:0;transform:scale(.8);transition:all .25s;
+  background:rgba(210,168,68,.2);border:1px solid rgba(210,168,68,.5);
+  border-radius:1px;padding:.4rem .9rem;
+  font-size:.68rem;color:rgba(220,190,110,.95);letter-spacing:.15em;
+  font-family:'Cinzel',serif;
+}
+.mem-screen-overlay:hover .mem-screen-expand{opacity:1;transform:scale(1);}
+
+/* Card info section */
+.mem-info-row{padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;}
+.mem-av{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.95rem;border:1px solid rgba(210,168,68,.14);background:linear-gradient(135deg,rgba(100,80,180,.14),rgba(60,50,120,.08));}
+.mem-details{flex:1;min-width:0;}
+.mc-name{font-size:.9rem;font-weight:600;color:rgba(210,188,148,.88);margin-bottom:.15rem;}
+.mc-meta{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem;}
+.mc-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(72,200,120,.4);animation:pg 2s infinite;flex-shrink:0;}
+.mc-time{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);}
+.mc-sb{font-size:.58rem;padding:.1rem .35rem;border-radius:1px;background:rgba(72,200,120,.1);border:1px solid rgba(72,200,120,.22);color:rgba(72,200,120,.75);}
+.mc-task{font-size:.75rem;color:rgba(175,152,108,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+.empty-st{grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--muted);}
 .empty-ico{font-size:2.2rem;margin-bottom:.9rem;opacity:.35;}
 .empty-txt{font-size:.82rem;letter-spacing:.08em;line-height:1.9;}
 
-/* DETAIL MODAL */
-.det-overlay{position:fixed;inset:0;z-index:200;background:rgba(6,5,3,.82);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fi .25s ease;}
+/* FULLSCREEN MODAL */
+.det-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,3,2,.9);backdrop-filter:blur(12px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;animation:fi .25s ease;}
 .det-overlay.hidden{display:none;}
-.det-modal{width:100%;max-width:700px;max-height:90vh;overflow-y:auto;background:rgba(16,12,7,.97);border:1px solid rgba(210,168,68,.15);border-radius:2px;padding:2rem 2.5rem 2.5rem;box-shadow:0 0 100px rgba(0,0,0,.8);animation:mi .35s cubic-bezier(.16,1,.3,1);}
-.det-close{float:right;background:transparent;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;transition:color .2s;line-height:1;}
-.det-close:hover{color:var(--text);}
-.det-hdr{display:flex;align-items:center;gap:1.2rem;margin-bottom:2rem;clear:both;}
-.det-av{width:60px;height:60px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.5rem;border:1px solid rgba(210,168,68,.22);background:linear-gradient(135deg,rgba(210,155,50,.2),rgba(180,125,40,.1));}
-.det-name{font-size:1.25rem;font-weight:600;color:rgba(228,205,152,.95);margin-bottom:.3rem;}
-.det-el{font-family:'DM Mono',monospace;font-size:.85rem;color:rgba(210,168,68,.65);}
-.det-tl{font-size:.62rem;color:var(--muted);letter-spacing:.18em;margin-bottom:.4rem;margin-top:1.2rem;}
-.det-tv{font-size:.9rem;color:rgba(205,180,132,.75);line-height:1.7;padding:.9rem 1rem;background:rgba(0,0,0,.2);border-radius:1px;border-left:2px solid rgba(210,168,68,.18);margin-bottom:1.5rem;}
-.screen-ttl{font-size:.65rem;color:rgba(210,168,68,.45);letter-spacing:.25em;margin-bottom:.9rem;display:flex;align-items:center;gap:.7rem;}
-.screen-ttl::after{content:'';flex:1;height:1px;background:rgba(210,168,68,.08);}
-.screen-view{width:100%;aspect-ratio:16/9;border-radius:1px;background:rgba(0,0,0,.5);border:1px solid rgba(210,168,68,.1);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
-.screen-view video{width:100%;height:100%;object-fit:contain;display:none;}
-.screen-ph{text-align:center;color:var(--muted);}
-.screen-ph-ico{font-size:2rem;opacity:.3;margin-bottom:.6rem;}
-.screen-ph-txt{font-size:.75rem;letter-spacing:.08em;line-height:1.8;}
-.connecting{font-size:.72rem;color:rgba(210,168,68,.5);letter-spacing:.1em;display:flex;align-items:center;justify-content:center;gap:.6rem;}
+.det-top{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:900px;margin-bottom:1rem;}
+.det-info{display:flex;align-items:center;gap:1rem;}
+.det-av{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:1px solid rgba(210,168,68,.22);background:linear-gradient(135deg,rgba(210,155,50,.2),rgba(180,125,40,.1));}
+.det-name{font-size:1rem;font-weight:600;color:rgba(228,205,152,.95);}
+.det-el{font-family:'DM Mono',monospace;font-size:.78rem;color:rgba(210,168,68,.6);margin-top:.15rem;}
+.det-task{font-size:.78rem;color:var(--muted);margin-top:.1rem;}
+.det-close{background:transparent;border:1px solid rgba(210,168,68,.2);border-radius:1px;color:var(--muted);font-size:.75rem;font-family:'Cinzel',serif;letter-spacing:.2em;padding:.45rem .9rem;cursor:pointer;transition:all .3s;}
+.det-close:hover{border-color:rgba(210,168,68,.5);color:var(--text);}
+
+/* fullscreen video */
+.det-screen{width:100%;max-width:900px;aspect-ratio:16/9;background:rgba(0,0,0,.7);border:1px solid rgba(210,168,68,.12);border-radius:2px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.det-screen video{width:100%;height:100%;object-fit:contain;display:none;}
+.det-screen-ph{text-align:center;color:var(--muted);}
+.det-screen-ph-ico{font-size:2.5rem;opacity:.25;margin-bottom:.8rem;}
+.det-screen-ph-txt{font-size:.8rem;letter-spacing:.08em;line-height:1.8;}
+.connecting{font-size:.75rem;color:rgba(210,168,68,.5);display:flex;align-items:center;gap:.7rem;}
 .spin{width:12px;height:12px;border:1.5px solid rgba(210,168,68,.2);border-top-color:rgba(210,168,68,.7);border-radius:50%;animation:sp .8s linear infinite;}
 @keyframes sp{to{transform:rotate(360deg)}}
 
-/* error toast */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(200,60,40,.9);color:#fff;font-size:.8rem;padding:.7rem 1.5rem;border-radius:2px;z-index:999;animation:fi .3s ease;display:none;}
+/* toast */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(200,60,40,.9);color:#fff;font-size:.8rem;padding:.7rem 1.5rem;border-radius:2px;z-index:999;display:none;}
 
 .hidden{display:none!important;}
-@media(max-width:750px){
+@media(max-width:800px){
   .room-body{grid-template-columns:1fr;padding:1.2rem 1rem 2rem;}
   .site-header{padding:1rem 1.2rem;}
-  .det-modal{padding:1.5rem 1.2rem 2rem;}
   .modal{padding:2rem 1.5rem 2.5rem;}
   .lobby-title{font-size:1.6rem;}
+  .mems-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -205,7 +244,7 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
   <button class="start-btn" onclick="openJoinModal()">开始自习</button>
 </div>
 
-<!-- JOIN MODAL — no screen share here anymore -->
+<!-- JOIN MODAL -->
 <div class="overlay hidden" id="join-modal">
   <div class="modal">
     <div class="modal-title">进入自习室</div>
@@ -239,8 +278,7 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
         <div class="my-el" id="my-el">⏱ 0s</div>
         <div class="my-tl">当前任务</div>
         <div class="my-tv" id="my-tv"></div>
-        <!-- Screen share toggle lives here, after joining -->
-        <div class="share-tog" id="share-tog" onclick="toggleShare()">
+        <div class="share-tog" onclick="toggleShare()">
           <div class="tog-icon">🖥️</div>
           <div style="flex:1;">
             <div class="tog-lbl">共享我的屏幕</div>
@@ -250,8 +288,9 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
         </div>
       </div>
     </div>
+
     <!-- Members -->
-    <div>
+    <div class="mems-panel">
       <div class="mems-hdr">
         <div class="panel-lbl" style="margin-bottom:0;flex:1;">自习室成员 <span class="mems-cnt" id="room-cnt">(0 人)</span></div>
       </div>
@@ -262,33 +301,31 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
   </div>
 </div>
 
-<!-- DETAIL MODAL -->
+<!-- FULLSCREEN DETAIL -->
 <div class="det-overlay hidden" id="det-overlay">
-  <div class="det-modal">
-    <button class="det-close" onclick="closeDetail()">✕</button>
-    <div class="det-hdr">
+  <div class="det-top">
+    <div class="det-info">
       <div class="det-av" id="d-av">👤</div>
       <div>
         <div class="det-name" id="d-name"></div>
         <div class="det-el" id="d-el"></div>
+        <div class="det-task" id="d-task"></div>
       </div>
     </div>
-    <div class="det-tl">正在专注</div>
-    <div class="det-tv" id="d-tv"></div>
-    <div class="screen-ttl">实时屏幕</div>
-    <div class="screen-view">
-      <div class="screen-ph" id="screen-ph">
-        <div class="screen-ph-ico">🖥️</div>
-        <div class="screen-ph-txt" id="screen-ph-txt">该成员未开启屏幕共享</div>
-      </div>
-      <video id="screen-video" autoplay playsinline></video>
+    <button class="det-close" onclick="closeDetail()">✕ 关闭</button>
+  </div>
+  <div class="det-screen" id="det-screen">
+    <div class="det-screen-ph" id="det-ph">
+      <div class="det-screen-ph-ico">🖥️</div>
+      <div class="det-screen-ph-txt" id="det-ph-txt">该成员未开启屏幕共享</div>
     </div>
+    <video id="det-video" autoplay playsinline></video>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, remove, get }
+import { getDatabase, ref, set, onValue, remove }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -302,64 +339,75 @@ const firebaseConfig = {
 };
 
 let app, db;
-try {
-  app = initializeApp(firebaseConfig);
-  db  = getDatabase(app);
-} catch(e) {
-  showToast("Firebase 初始化失败：" + e.message);
-}
+try { app = initializeApp(firebaseConfig); db = getDatabase(app); }
+catch(e) { showToast("Firebase 初始化失败：" + e.message); }
 
 /* STATE */
-let myId=null, myRef=null, joinTime=null;
-let localStream=null, peerConns={}, viewerConn=null, viewingId=null;
+let myId=null, myRef=null, joinTime=null, meData={};
+let localStream=null;
+// peerConns: map of viewerId -> RTCPeerConnection (sharer side)
+let peerConns = {};
+// previewConns: map of memberId -> { pc, stream } (viewer side, for thumbnails)
+let previewConns = {};
+// detailConn: RTCPeerConnection for the fullscreen modal
+let detailConn=null, viewingId=null;
 let heartTimer=null, elapsedTimer=null, detTimer=null;
 let allMembers={};
-let meData={};
 
-/* UTILS */
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
-const fmt = ms => {
-  const s=Math.floor(ms/1000), h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60;
-  return h>0?`${h}h ${m}m ${sec}s` : m>0?`${m}m ${sec}s` : `${sec}s`;
-};
+const fmt = ms => { const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60; return h>0?`${h}h ${m}m ${sec}s`:m>0?`${m}m ${sec}s`:`${sec}s`; };
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const AVS = ["👩‍💻","👨‍🎓","🧑‍🎨","👩‍🔬","🧑‍💼","👨‍🏫","🧑‍🚀","👩‍🎤","🧑‍🔬","👨‍💻","🧑‍🍳","👨‍🎨"];
 const av  = n => AVS[n.charCodeAt(0) % AVS.length];
+const ICE = { iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}] };
 
 function showToast(msg, dur=4000) {
   const t = document.getElementById("toast");
-  t.textContent = msg; t.style.display = "block";
-  setTimeout(() => t.style.display = "none", dur);
+  t.textContent=msg; t.style.display="block";
+  setTimeout(()=>t.style.display="none", dur);
 }
 
 /* CLOCK */
 const tickClock = () => {
-  const n = new Date();
-  document.getElementById("htime").textContent = n.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"});
-  document.getElementById("hdate").textContent = n.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"short"});
+  const n=new Date();
+  document.getElementById("htime").textContent=n.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"});
+  document.getElementById("hdate").textContent=n.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"short"});
 };
-tickClock(); setInterval(tickClock, 1000);
+tickClock(); setInterval(tickClock,1000);
 
 /* LISTEN MEMBERS */
-try {
-  onValue(ref(db,"members"), snap => {
-    const raw = snap.val() || {}, now = Date.now();
-    allMembers = {};
-    Object.entries(raw).forEach(([id,m]) => { if(now - m.lastSeen < 9000) allMembers[id] = m; });
-    renderLobby();
-    if(myId) renderRoom();
-  }, err => showToast("数据库连接失败：" + err.message));
-} catch(e) { showToast("监听失败：" + e.message); }
+onValue(ref(db,"members"), snap=>{
+  const raw=snap.val()||{}, now=Date.now();
+  const prev = {...allMembers};
+  allMembers={};
+  Object.entries(raw).forEach(([id,m])=>{ if(now-m.lastSeen<9000) allMembers[id]=m; });
 
-function renderLobby() {
-  const others = Object.entries(allMembers).filter(([id]) => id !== myId);
-  document.getElementById("lobby-count").textContent = others.length;
-  const grid = document.getElementById("lobby-grid");
-  if(others.length === 0) {
-    grid.innerHTML = '<div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div>';
-    return;
+  // connect previews for new sharing members
+  if(myId) {
+    Object.entries(allMembers).forEach(([id,m])=>{
+      if(id!==myId && m.sharing && !previewConns[id]) {
+        connectPreview(id);
+      }
+    });
+    // disconnect previews for members who stopped sharing or left
+    Object.keys(previewConns).forEach(id=>{
+      if(!allMembers[id] || !allMembers[id].sharing) {
+        disconnectPreview(id);
+      }
+    });
   }
-  grid.innerHTML = others.map(([id,m],i) => `
+
+  renderLobby();
+  if(myId) renderRoom();
+}, err=>showToast("连接失败："+err.message));
+
+/* ── RENDER LOBBY ── */
+function renderLobby(){
+  const others=Object.entries(allMembers).filter(([id])=>id!==myId);
+  document.getElementById("lobby-count").textContent=others.length;
+  const grid=document.getElementById("lobby-grid");
+  if(!others.length){ grid.innerHTML='<div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div>'; return; }
+  grid.innerHTML=others.map(([id,m],i)=>`
     <div class="lobby-card" style="animation-delay:${i*.06}s" data-id="${id}">
       <div class="lc-top">
         <div class="lc-av">${av(m.username)}</div>
@@ -367,7 +415,7 @@ function renderLobby() {
           <div class="lc-name">${esc(m.username)}</div>
           <div class="lc-meta">
             <span class="lc-time">⏱ ${fmt(Date.now()-m.joinTime)}</span>
-            ${m.sharing ? '<span class="lc-sbadge">📺 共享中</span>' : ""}
+            ${m.sharing?'<span class="lc-sbadge">📺 共享中</span>':""}
           </div>
         </div>
       </div>
@@ -375,262 +423,319 @@ function renderLobby() {
       <div class="lc-hint">点击查看详情 →</div>
     </div>
   `).join("");
-  grid.querySelectorAll(".lobby-card").forEach(el => {
-    el.onclick = () => openDetail(el.dataset.id, allMembers[el.dataset.id]);
+  grid.querySelectorAll(".lobby-card").forEach(el=>{
+    el.onclick=()=>openDetail(el.dataset.id, allMembers[el.dataset.id]);
   });
 }
 
-function renderRoom() {
-  const others = Object.entries(allMembers).filter(([id]) => id !== myId);
-  document.getElementById("room-cnt").textContent = `(${others.length} 人)`;
-  const grid = document.getElementById("room-grid");
-  if(others.length === 0) {
-    grid.innerHTML = '<div class="empty-st"><div class="empty-ico">🌙</div><div class="empty-txt">自习室目前只有你<br>把链接分享给朋友，一起专注吧</div></div>';
+/* ── RENDER ROOM ── */
+function renderRoom(){
+  const others=Object.entries(allMembers).filter(([id])=>id!==myId);
+  document.getElementById("room-cnt").textContent=`(${others.length} 人)`;
+  const grid=document.getElementById("room-grid");
+
+  if(!others.length){
+    grid.innerHTML='<div class="empty-st"><div class="empty-ico">🌙</div><div class="empty-txt">自习室目前只有你<br>把链接分享给朋友，一起专注吧</div></div>';
     return;
   }
-  grid.innerHTML = others.map(([id,m],i) => `
-    <div class="mem-card" style="animation-delay:${i*.05}s" data-id="${id}">
-      <div class="mem-av">${av(m.username)}</div>
-      <div class="mem-info">
-        <div class="mc-name">${esc(m.username)}</div>
-        <div class="mc-meta">
-          <div class="mc-dot"></div>
-          <span class="mc-time">已学习 ${fmt(Date.now()-m.joinTime)}</span>
-          ${m.sharing ? '<span class="mc-sb">📺 共享中</span>' : ""}
+
+  // preserve existing video elements
+  const existing={};
+  grid.querySelectorAll(".mem-card[data-id]").forEach(el=>{
+    existing[el.dataset.id]=el;
+  });
+
+  const newIds = new Set(others.map(([id])=>id));
+
+  // remove cards for gone members
+  Object.keys(existing).forEach(id=>{ if(!newIds.has(id)) existing[id].remove(); });
+
+  others.forEach(([id,m],i)=>{
+    if(existing[id]){
+      // update text parts only
+      const el=existing[id];
+      el.querySelector(".mc-name").textContent=m.username;
+      el.querySelector(".mc-time").textContent="已学习 "+fmt(Date.now()-m.joinTime);
+      const sbEl=el.querySelector(".mc-sb");
+      if(m.sharing && !sbEl){ el.querySelector(".mc-meta").insertAdjacentHTML("beforeend",'<span class="mc-sb">📺 共享中</span>'); }
+      else if(!m.sharing && sbEl){ sbEl.remove(); }
+      // attach/update video stream if available
+      attachPreviewVideo(id, el);
+    } else {
+      // create new card
+      const div=document.createElement("div");
+      div.className="mem-card";
+      div.dataset.id=id;
+      div.style.animationDelay=`${i*.05}s`;
+      div.innerHTML=`
+        <div class="mem-screen-preview" data-id="${id}">
+          <div class="mem-screen-placeholder" id="ph-${id}">
+            <div class="mem-screen-placeholder-ico">🖥️</div>
+            <div class="mem-screen-placeholder-txt">${m.sharing?"正在连接…":"未开启共享"}</div>
+          </div>
+          <video id="prev-${id}" autoplay playsinline muted style="display:none;width:100%;height:100%;object-fit:cover;"></video>
+          <div class="mem-screen-overlay">
+            <div class="mem-screen-expand">${m.sharing?"展开查看":"—"}</div>
+          </div>
         </div>
-        <div class="mc-task">${esc(m.task)}</div>
-        <div class="mc-hint">点击查看详情 →</div>
-      </div>
-    </div>
-  `).join("");
-  grid.querySelectorAll(".mem-card").forEach(el => {
-    el.onclick = () => openDetail(el.dataset.id, allMembers[el.dataset.id]);
+        <div class="mem-info-row">
+          <div class="mem-av">${av(m.username)}</div>
+          <div class="mem-details">
+            <div class="mc-name">${esc(m.username)}</div>
+            <div class="mc-meta">
+              <div class="mc-dot"></div>
+              <span class="mc-time">已学习 ${fmt(Date.now()-m.joinTime)}</span>
+              ${m.sharing?'<span class="mc-sb">📺 共享中</span>':""}
+            </div>
+            <div class="mc-task">${esc(m.task)}</div>
+          </div>
+        </div>
+      `;
+      div.querySelector(".mem-screen-preview").onclick=()=>openDetail(id,allMembers[id]);
+      grid.appendChild(div);
+      attachPreviewVideo(id, div);
+    }
   });
 }
 
-/* JOIN */
+function attachPreviewVideo(id, cardEl) {
+  const conn = previewConns[id];
+  if(!conn || !conn.stream) return;
+  const video = cardEl.querySelector(`#prev-${id}`);
+  const ph    = cardEl.querySelector(`#ph-${id}`);
+  if(video && video.srcObject !== conn.stream){
+    video.srcObject = conn.stream;
+    video.style.display = "block";
+    if(ph) ph.style.display = "none";
+  }
+}
+
+/* ── PREVIEW WebRTC (thumbnail) ── */
+async function connectPreview(sharerId) {
+  if(previewConns[sharerId]) return;
+  const connId = myId + "_prev";
+  const pc = new RTCPeerConnection(ICE);
+  previewConns[sharerId] = { pc, stream: null };
+  pc.addTransceiver("video",{direction:"recvonly"});
+
+  pc.ontrack = e => {
+    previewConns[sharerId].stream = e.streams[0];
+    // attach to card if exists
+    const card = document.querySelector(`.mem-card[data-id="${sharerId}"]`);
+    if(card) attachPreviewVideo(sharerId, card);
+    // also feed detail modal if open for this member
+    if(viewingId===sharerId){
+      const dv=document.getElementById("det-video"), dp=document.getElementById("det-ph");
+      dv.srcObject=e.streams[0]; dv.style.display="block"; dp.style.display="none";
+    }
+  };
+
+  let ibuf=[];
+  pc.onicecandidate=e=>{
+    if(e.candidate){
+      set(ref(db,`signals/${sharerId}/from/${myId}_prev/vi/${ibuf.length}`),{c:e.candidate.toJSON()});
+      ibuf.push(1);
+    }
+  };
+
+  const offer=await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  await set(ref(db,`signals/${sharerId}/from/${myId}_prev/offer`),{sdp:offer.sdp,type:offer.type});
+
+  const ansRef=ref(db,`signals/${sharerId}/from/${myId}_prev/answer`);
+  const unsub=onValue(ansRef,async snap=>{
+    if(!snap.val()||pc.signalingState!=="have-local-offer") return;
+    await pc.setRemoteDescription(snap.val()); unsub();
+  });
+  onValue(ref(db,`signals/${sharerId}/from/${myId}_prev/si`),snap=>{
+    Object.values(snap.val()||{}).forEach(async c=>{
+      try{await pc.addIceCandidate(new RTCIceCandidate(c.c));}catch{}
+    });
+  });
+}
+
+function disconnectPreview(id) {
+  const conn = previewConns[id];
+  if(!conn) return;
+  try{ conn.pc.close(); }catch{}
+  delete previewConns[id];
+  // reset card UI
+  const card=document.querySelector(`.mem-card[data-id="${id}"]`);
+  if(card){
+    const v=card.querySelector(`#prev-${id}`);
+    const ph=card.querySelector(`#ph-${id}`);
+    if(v){v.srcObject=null;v.style.display="none";}
+    if(ph){ph.style.display="flex";ph.querySelector(".mem-screen-placeholder-txt").textContent="未开启共享";}
+  }
+  remove(ref(db,`signals/${id}/from/${myId}_prev`)).catch(()=>{});
+}
+
+/* ── JOIN ── */
 window.openJoinModal  = () => document.getElementById("join-modal").classList.remove("hidden");
 window.closeJoinModal = () => document.getElementById("join-modal").classList.add("hidden");
-
-["inp-user","inp-task"].forEach(id => {
-  document.getElementById(id).addEventListener("keydown", e => { if(e.key==="Enter") handleJoin(); });
+["inp-user","inp-task"].forEach(id=>{
+  document.getElementById(id).addEventListener("keydown",e=>{ if(e.key==="Enter") handleJoin(); });
 });
 
 window.handleJoin = async () => {
-  const username = document.getElementById("inp-user").value.trim();
-  const task     = document.getElementById("inp-task").value.trim();
-  let ok = true;
-  document.getElementById("err-user").textContent = "";
-  document.getElementById("err-task").textContent = "";
-  if(!username){ document.getElementById("err-user").textContent = "⚠ 请输入用户名"; ok=false; }
-  if(!task)    { document.getElementById("err-task").textContent = "⚠ 请输入今日任务"; ok=false; }
+  const username=document.getElementById("inp-user").value.trim();
+  const task=document.getElementById("inp-task").value.trim();
+  let ok=true;
+  document.getElementById("err-user").textContent="";
+  document.getElementById("err-task").textContent="";
+  if(!username){document.getElementById("err-user").textContent="⚠ 请输入用户名";ok=false;}
+  if(!task){document.getElementById("err-task").textContent="⚠ 请输入今日任务";ok=false;}
   if(!ok) return;
 
-  const btn = document.getElementById("confirm-btn");
-  btn.textContent = "进入中…"; btn.disabled = true;
-
-  try {
-    myId = uid(); joinTime = Date.now();
-    myRef = ref(db, `members/${myId}`);
-    meData = { username, task, joinTime, lastSeen: Date.now(), sharing: false };
-    await set(myRef, meData);
-
-    heartTimer = setInterval(async () => {
-      try { await set(myRef, { ...meData, lastSeen: Date.now() }); } catch{}
-    }, 3000);
-
-    elapsedTimer = setInterval(() => {
-      document.getElementById("my-el").textContent = "⏱ " + fmt(Date.now() - joinTime);
-    }, 1000);
+  const btn=document.getElementById("confirm-btn");
+  btn.textContent="进入中…"; btn.disabled=true;
+  try{
+    myId=uid(); joinTime=Date.now(); myRef=ref(db,`members/${myId}`);
+    meData={username,task,joinTime,lastSeen:Date.now(),sharing:false};
+    await set(myRef,meData);
+    heartTimer=setInterval(async()=>{ try{await set(myRef,{...meData,lastSeen:Date.now()});}catch{} },3000);
+    elapsedTimer=setInterval(()=>{ document.getElementById("my-el").textContent="⏱ "+fmt(Date.now()-joinTime); },1000);
 
     closeJoinModal();
-    document.getElementById("lobby").style.display = "none";
-    document.getElementById("room").style.display  = "flex";
-    document.getElementById("leave-btn").style.display = "block";
-    document.getElementById("my-av").textContent  = av(username);
-    document.getElementById("my-name").textContent = username;
-    document.getElementById("my-tv").textContent  = task;
+    document.getElementById("lobby").style.display="none";
+    document.getElementById("room").style.display="flex";
+    document.getElementById("leave-btn").style.display="block";
+    document.getElementById("my-av").textContent=av(username);
+    document.getElementById("my-name").textContent=username;
+    document.getElementById("my-tv").textContent=task;
 
     listenSignals();
-    window.addEventListener("beforeunload", () => { remove(myRef); cleanRTC(); });
+    window.addEventListener("beforeunload",()=>{ remove(myRef); cleanAll(); });
 
-  } catch(e) {
-    showToast("进入失败：" + e.message);
-  } finally {
-    btn.textContent = "进入自习室 →"; btn.disabled = false;
-  }
+    // connect previews for already-sharing members
+    Object.entries(allMembers).forEach(([id,m])=>{
+      if(id!==myId && m.sharing) connectPreview(id);
+    });
+  } catch(e){ showToast("进入失败："+e.message); }
+  finally{ btn.textContent="进入自习室 →"; btn.disabled=false; }
 };
 
-/* SCREEN SHARE TOGGLE — inside room, no page-jump issue */
+/* ── SCREEN SHARE TOGGLE ── */
 window.toggleShare = async () => {
-  const sw = document.getElementById("tog-sw");
-  const desc = document.getElementById("tog-desc");
-
-  if(localStream) {
-    // turn off
-    localStream.getTracks().forEach(t => t.stop());
-    localStream = null;
-    sw.classList.remove("on");
-    desc.textContent = "开启后他人可实时查看";
-    meData.sharing = false;
-    try { await set(myRef, { ...meData, lastSeen: Date.now() }); } catch{}
+  const sw=document.getElementById("tog-sw"), desc=document.getElementById("tog-desc");
+  if(localStream){
+    localStream.getTracks().forEach(t=>t.stop()); localStream=null;
+    sw.classList.remove("on"); desc.textContent="开启后他人可实时查看";
+    meData.sharing=false;
+    try{await set(myRef,{...meData,lastSeen:Date.now()});}catch{}
   } else {
-    // turn on
-    try {
-      localStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false });
-      localStream.getVideoTracks()[0].addEventListener("ended", () => {
-        // user stopped sharing via browser UI
-        localStream = null;
-        sw.classList.remove("on");
-        desc.textContent = "开启后他人可实时查看";
-        meData.sharing = false;
-        set(myRef, { ...meData, lastSeen: Date.now() }).catch(()=>{});
+    try{
+      localStream=await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
+      localStream.getVideoTracks()[0].addEventListener("ended",()=>{
+        localStream=null; sw.classList.remove("on"); desc.textContent="开启后他人可实时查看";
+        meData.sharing=false; set(myRef,{...meData,lastSeen:Date.now()}).catch(()=>{});
       });
-      sw.classList.add("on");
-      desc.textContent = "屏幕共享已开启 🟢";
-      meData.sharing = true;
-      try { await set(myRef, { ...meData, lastSeen: Date.now() }); } catch{}
-    } catch(e) {
-      // user cancelled or denied
-      localStream = null;
-      sw.classList.remove("on");
-    }
+      sw.classList.add("on"); desc.textContent="屏幕共享已开启 🟢";
+      meData.sharing=true;
+      try{await set(myRef,{...meData,lastSeen:Date.now()});}catch{}
+    }catch{ localStream=null; sw.classList.remove("on"); }
   }
 };
 
-/* LEAVE */
+/* ── LEAVE ── */
 window.handleLeave = async () => {
   clearInterval(heartTimer); clearInterval(elapsedTimer);
-  cleanRTC();
-  if(localStream){ localStream.getTracks().forEach(t=>t.stop()); localStream=null; }
+  cleanAll();
+  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null;}
   document.getElementById("tog-sw").classList.remove("on");
-  document.getElementById("tog-desc").textContent = "开启后他人可实时查看";
+  document.getElementById("tog-desc").textContent="开启后他人可实时查看";
   if(myRef) await remove(myRef);
-  myId=null; myRef=null; joinTime=null; meData={};
-  document.getElementById("room").style.display  = "none";
-  document.getElementById("lobby").style.display = "flex";
-  document.getElementById("leave-btn").style.display = "none";
-  document.getElementById("my-el").textContent = "⏱ 0s";
+  myId=null;myRef=null;joinTime=null;meData={};
+  document.getElementById("room").style.display="none";
+  document.getElementById("lobby").style.display="flex";
+  document.getElementById("leave-btn").style.display="none";
+  document.getElementById("my-el").textContent="⏱ 0s";
 };
 
-/* DETAIL MODAL */
+/* ── DETAIL MODAL (fullscreen) ── */
 window.openDetail = async (id, m) => {
   if(!m) return;
-  viewingId = id;
-  document.getElementById("d-av").textContent   = av(m.username);
-  document.getElementById("d-name").textContent = m.username;
-  document.getElementById("d-tv").textContent   = m.task;
-  document.getElementById("d-el").textContent   = "已学习 " + fmt(Date.now() - m.joinTime);
+  viewingId=id;
+  document.getElementById("d-av").textContent=av(m.username);
+  document.getElementById("d-name").textContent=m.username;
+  document.getElementById("d-task").textContent="📌 "+m.task;
+  document.getElementById("d-el").textContent="已学习 "+fmt(Date.now()-m.joinTime);
   clearInterval(detTimer);
-  detTimer = setInterval(() => {
-    const cur = allMembers[id];
-    if(cur) document.getElementById("d-el").textContent = "已学习 " + fmt(Date.now() - cur.joinTime);
-  }, 1000);
+  detTimer=setInterval(()=>{ const c=allMembers[id]; if(c) document.getElementById("d-el").textContent="已学习 "+fmt(Date.now()-c.joinTime); },1000);
 
-  const video = document.getElementById("screen-video");
-  const ph    = document.getElementById("screen-ph");
-  const phtxt = document.getElementById("screen-ph-txt");
-  video.style.display = "none"; video.srcObject = null; ph.style.display = "flex";
+  const dv=document.getElementById("det-video");
+  const dp=document.getElementById("det-ph");
+  const dptxt=document.getElementById("det-ph-txt");
+  dv.style.display="none"; dv.srcObject=null; dp.style.display="flex";
   document.getElementById("det-overlay").classList.remove("hidden");
 
-  if(m.sharing && myId) {
-    phtxt.innerHTML = '<div class="connecting"><div class="spin"></div> 正在连接屏幕…</div>';
-    await startViewing(id);
-  } else if(!m.sharing) {
-    phtxt.textContent = "该成员未开启屏幕共享";
+  // reuse preview stream if already connected
+  const prev=previewConns[id];
+  if(prev && prev.stream){
+    dv.srcObject=prev.stream; dv.style.display="block"; dp.style.display="none";
+  } else if(m.sharing && myId){
+    dptxt.innerHTML='<div class="connecting"><div class="spin"></div> 正在连接…</div>';
+    // will be filled by preview ontrack
+  } else if(!m.sharing){
+    dptxt.textContent="该成员未开启屏幕共享";
   } else {
-    phtxt.textContent = "请先进入自习室后再查看屏幕";
+    dptxt.textContent="请先进入自习室后再查看屏幕";
   }
 };
 
 window.closeDetail = () => {
   clearInterval(detTimer);
   document.getElementById("det-overlay").classList.add("hidden");
-  const video = document.getElementById("screen-video");
-  video.srcObject = null; video.style.display = "none";
-  document.getElementById("screen-ph").style.display = "flex";
-  if(viewerConn){ viewerConn.close(); viewerConn=null; }
-  if(myId && viewingId) remove(ref(db, `signals/${viewingId}/from/${myId}`)).catch(()=>{});
-  viewingId = null;
+  const dv=document.getElementById("det-video");
+  dv.srcObject=null; dv.style.display="none";
+  document.getElementById("det-ph").style.display="flex";
+  viewingId=null;
 };
 
-/* WebRTC */
-const ICE = { iceServers:[{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}] };
-
-async function startViewing(sharerId) {
-  if(viewerConn){ viewerConn.close(); viewerConn=null; }
-  const pc = new RTCPeerConnection(ICE); viewerConn = pc;
-  pc.addTransceiver("video", { direction:"recvonly" });
-  pc.ontrack = e => {
-    const v = document.getElementById("screen-video"), ph = document.getElementById("screen-ph");
-    v.srcObject = e.streams[0]; v.style.display = "block"; ph.style.display = "none";
-  };
-  let ibuf = [];
-  pc.onicecandidate = e => {
-    if(e.candidate){
-      set(ref(db, `signals/${sharerId}/from/${myId}/vi/${ibuf.length}`), {c: e.candidate.toJSON()});
-      ibuf.push(1);
-    }
-  };
-  const offer = await pc.createOffer();
-  await pc.setLocalDescription(offer);
-  await set(ref(db, `signals/${sharerId}/from/${myId}/offer`), {sdp: offer.sdp, type: offer.type});
-
-  const ansRef = ref(db, `signals/${sharerId}/from/${myId}/answer`);
-  const unsub = onValue(ansRef, async snap => {
-    if(!snap.val() || pc.signalingState !== "have-local-offer") return;
-    await pc.setRemoteDescription(snap.val()); unsub();
-  });
-  onValue(ref(db, `signals/${sharerId}/from/${myId}/si`), snap => {
-    Object.values(snap.val()||{}).forEach(async c => {
-      try { await pc.addIceCandidate(new RTCIceCandidate(c.c)); } catch{}
-    });
-  });
-}
-
-function listenSignals() {
+/* ── SIGNALS (sharer side) ── */
+function listenSignals(){
   if(!myId) return;
-  onValue(ref(db, `signals/${myId}/from`), async snap => {
-    const viewers = snap.val() || {};
-    for(const [vid, data] of Object.entries(viewers)){
-      if(!data.offer || peerConns[vid] || !localStream) continue;
-      await answerViewer(vid, data.offer);
+  onValue(ref(db,`signals/${myId}/from`),async snap=>{
+    const viewers=snap.val()||{};
+    for(const [vid,data] of Object.entries(viewers)){
+      if(!data.offer||peerConns[vid]||!localStream) continue;
+      await answerViewer(vid,data.offer);
     }
   });
 }
 
-async function answerViewer(vid, offerData) {
-  const pc = new RTCPeerConnection(ICE); peerConns[vid] = pc;
-  localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-  let ibuf = [];
-  pc.onicecandidate = e => {
+async function answerViewer(vid,offerData){
+  const pc=new RTCPeerConnection(ICE); peerConns[vid]=pc;
+  localStream.getTracks().forEach(t=>pc.addTrack(t,localStream));
+  let ibuf=[];
+  pc.onicecandidate=e=>{
     if(e.candidate){
-      set(ref(db, `signals/${myId}/from/${vid}/si/${ibuf.length}`), {c: e.candidate.toJSON()});
+      set(ref(db,`signals/${myId}/from/${vid}/si/${ibuf.length}`),{c:e.candidate.toJSON()});
       ibuf.push(1);
     }
   };
-  await pc.setRemoteDescription({sdp: offerData.sdp, type: offerData.type});
-  const answer = await pc.createAnswer();
+  await pc.setRemoteDescription({sdp:offerData.sdp,type:offerData.type});
+  const answer=await pc.createAnswer();
   await pc.setLocalDescription(answer);
-  await set(ref(db, `signals/${myId}/from/${vid}/answer`), {sdp: answer.sdp, type: answer.type});
-  onValue(ref(db, `signals/${myId}/from/${vid}/vi`), snap => {
-    Object.values(snap.val()||{}).forEach(async c => {
-      try { await pc.addIceCandidate(new RTCIceCandidate(c.c)); } catch{}
+  await set(ref(db,`signals/${myId}/from/${vid}/answer`),{sdp:answer.sdp,type:answer.type});
+  onValue(ref(db,`signals/${myId}/from/${vid}/vi`),snap=>{
+    Object.values(snap.val()||{}).forEach(async c=>{
+      try{await pc.addIceCandidate(new RTCIceCandidate(c.c));}catch{}
     });
   });
-  pc.onconnectionstatechange = () => {
+  pc.onconnectionstatechange=()=>{
     if(["disconnected","failed","closed"].includes(pc.connectionState)){
       pc.close(); delete peerConns[vid];
-      remove(ref(db, `signals/${myId}/from/${vid}`)).catch(()=>{});
+      remove(ref(db,`signals/${myId}/from/${vid}`)).catch(()=>{});
     }
   };
 }
 
-function cleanRTC() {
-  Object.values(peerConns).forEach(pc => { try{pc.close();}catch{} });
-  peerConns = {};
-  if(viewerConn){ try{viewerConn.close();}catch{} viewerConn=null; }
-  if(myId) remove(ref(db, `signals/${myId}`)).catch(()=>{});
+function cleanAll(){
+  Object.values(peerConns).forEach(pc=>{try{pc.close();}catch{}});
+  peerConns={};
+  Object.keys(previewConns).forEach(id=>disconnectPreview(id));
+  if(myId) remove(ref(db,`signals/${myId}`)).catch(()=>{});
 }
 </script>
 </body>
