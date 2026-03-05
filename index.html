@@ -54,34 +54,26 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 .lc-hint{font-size:.6rem;color:rgba(210,168,68,.28);letter-spacing:.1em;margin-top:.7rem;text-align:right;}
 .lobby-empty{grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted);font-size:.82rem;letter-spacing:.1em;line-height:2;}
 .start-btn{padding:1.1rem 3.5rem;background:linear-gradient(135deg,rgba(210,155,50,.18),rgba(180,125,35,.08));border:1px solid rgba(210,168,68,.4);border-radius:1px;color:rgba(225,195,120,.95);font-family:'Cinzel',serif;font-size:.95rem;letter-spacing:.35em;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
-.start-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(210,168,68,.18),transparent);opacity:0;transition:opacity .3s;}
-.start-btn:hover::before{opacity:1;}
 .start-btn:hover{border-color:rgba(210,168,68,.7);box-shadow:0 0 30px rgba(210,155,50,.12);color:rgba(240,215,140,1);}
 
 /* JOIN MODAL */
 .overlay{position:fixed;inset:0;z-index:100;background:rgba(8,6,4,.78);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1.5rem;animation:fi .25s ease;}
 .overlay.hidden{display:none;}
-@keyframes fi{from{opacity:0}to{opacity:1}}
-.modal{width:100%;max-width:440px;background:rgba(18,14,8,.97);border:1px solid rgba(210,168,68,.18);border-radius:2px;padding:2.5rem 2.5rem 3rem;box-shadow:0 0 80px rgba(0,0,0,.7),inset 0 1px 0 rgba(210,168,68,.07);animation:mi .35s cubic-bezier(.16,1,.3,1);}
-@keyframes mi{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:none}}
+.modal{width:100%;max-width:440px;background:rgba(18,14,8,.97);border:1px solid rgba(210,168,68,.18);border-radius:2px;padding:2.5rem 2.5rem 3rem;box-shadow:0 0 80px rgba(0,0,0,.7);animation:mi .35s cubic-bezier(.16,1,.3,1);}
 .modal-title{font-family:'Cinzel',serif;font-size:.95rem;font-weight:400;color:rgba(210,168,68,.8);letter-spacing:.3em;text-align:center;margin-bottom:.3rem;}
 .modal-sub{font-size:.68rem;color:var(--muted);text-align:center;letter-spacing:.12em;margin-bottom:2rem;}
 .field{margin-bottom:1.3rem;}
 .field label{font-size:.65rem;color:rgba(210,168,68,.5);letter-spacing:.2em;display:block;margin-bottom:.55rem;}
-.field input{width:100%;background:rgba(255,255,255,.025);border:1px solid rgba(210,168,68,.12);border-radius:1px;padding:.8rem 1rem;color:var(--text);font-family:'Noto Serif SC',serif;font-size:.9rem;outline:none;transition:border-color .3s,background .3s;}
-.field input::placeholder{color:rgba(180,150,100,.22);}
-.field input:focus{border-color:rgba(210,168,68,.38);background:rgba(210,168,68,.035);}
+.field input{width:100%;background:rgba(255,255,255,.025);border:1px solid rgba(210,168,68,.12);border-radius:1px;padding:.8rem 1rem;color:var(--text);font-family:'Noto Serif SC',serif;font-size:.9rem;outline:none;}
 .field-err{font-size:.65rem;color:rgba(220,100,80,.7);margin-top:.35rem;}
 .modal-btns{display:flex;gap:.8rem;margin-top:1.8rem;}
-.btn-cancel{flex:1;padding:.85rem;background:transparent;border:1px solid rgba(210,168,68,.12);border-radius:1px;color:var(--muted);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;cursor:pointer;transition:all .3s;}
-.btn-cancel:hover{border-color:rgba(210,168,68,.25);color:rgba(200,180,130,.7);}
-.btn-confirm{flex:2;padding:.85rem;background:linear-gradient(135deg,rgba(210,155,50,.16),rgba(180,125,35,.08));border:1px solid rgba(210,168,68,.35);border-radius:1px;color:rgba(220,190,115,.9);font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.25em;cursor:pointer;transition:all .3s;}
-.btn-confirm:hover{border-color:rgba(210,168,68,.6);color:rgba(240,210,130,1);}
+.btn-cancel{flex:1;padding:.85rem;background:transparent;border:1px solid rgba(210,168,68,.12);border-radius:1px;color:var(--muted);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;cursor:pointer;}
+.btn-confirm{flex:2;padding:.85rem;background:linear-gradient(135deg,rgba(210,155,50,.16),rgba(180,125,35,.08));border:1px solid rgba(210,168,68,.35);border-radius:1px;color:rgba(220,190,115,.9);font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.25em;cursor:pointer;}
 
 /* ROOM */
 #room{display:none;position:relative;z-index:1;flex-direction:column;}
 .room-body{flex:1;display:grid;grid-template-columns:280px 1fr;gap:2rem;max-width:1200px;margin:0 auto;width:100%;padding:2rem 2rem 3rem;}
-.panel-lbl{font-size:.62rem;color:rgba(210,168,68,.42);letter-spacing:.25em;margin-bottom:1.1rem;display:flex;align-items:center;gap:.7rem;}
+.panel-lbl{font-size:.62rem;color:rgba(210,168,68,.42);letter-spacing:.25em;margin-bottom:1rem;display:flex;align-items:center;gap:.7rem;}
 .panel-lbl::after{content:'';flex:1;height:1px;background:rgba(210,168,68,.08);}
 .my-panel{position:sticky;top:2rem;align-self:start;}
 .my-card{background:rgba(210,168,68,.04);border:1px solid rgba(210,168,68,.14);border-radius:2px;padding:1.7rem;position:relative;overflow:hidden;}
@@ -91,73 +83,37 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
 .my-el{font-family:'DM Mono',monospace;font-size:.82rem;color:rgba(210,168,68,.65);margin-bottom:1.1rem;}
 .my-tl{font-size:.6rem;color:var(--muted);letter-spacing:.18em;margin-bottom:.38rem;}
 .my-tv{font-size:.88rem;color:rgba(208,182,136,.75);line-height:1.6;padding:.75rem;background:rgba(0,0,0,.18);border-radius:1px;border-left:2px solid rgba(210,168,68,.18);}
-.share-tog{display:flex;align-items:center;gap:1rem;padding:.85rem 1rem;border:1px solid rgba(210,168,68,.1);border-radius:1px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .3s;user-select:none;margin-top:1rem;}
-.share-tog:hover{border-color:rgba(210,168,68,.22);}
-.tog-icon{font-size:1.1rem;opacity:.7;}
-.tog-lbl{font-size:.82rem;color:rgba(210,190,150,.8);}
-.tog-desc{font-size:.65rem;color:var(--muted);margin-top:.15rem;}
+.share-tog{display:flex;align-items:center;gap:1rem;padding:.85rem 1rem;border:1px solid rgba(210,168,68,.1);border-radius:1px;background:rgba(255,255,255,.02);cursor:pointer;transition:all .3s;margin-top:1rem;}
 .tog-sw{width:36px;height:20px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(210,168,68,.15);position:relative;transition:all .3s;flex-shrink:0;}
 .tog-sw.on{background:rgba(210,168,68,.3);border-color:rgba(210,168,68,.5);}
 .tog-knob{width:14px;height:14px;border-radius:50%;background:rgba(180,150,100,.5);position:absolute;top:2px;left:2px;transition:all .3s;}
 .tog-sw.on .tog-knob{left:18px;background:rgba(220,185,110,.9);}
 
 /* MEMBER CARDS */
-.mems-panel{}
-.mems-hdr{display:flex;align-items:center;margin-bottom:1.1rem;}
-.mems-cnt{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--muted);margin-left:.4rem;}
 .mems-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;}
-.mem-card{background:rgba(14,11,7,.8);border:1px solid rgba(210,168,68,.1);border-radius:2px;overflow:hidden;transition:border-color .28s,transform .28s,box-shadow .28s;cursor:pointer;}
-.mem-card:hover{border-color:rgba(210,168,68,.28);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.4);}
+.mem-card{background:rgba(14,11,7,.8);border:1px solid rgba(210,168,68,.1);border-radius:2px;overflow:hidden;transition:all .28s;cursor:pointer;}
+.mem-card:hover{border-color:rgba(210,168,68,.28);transform:translateY(-2px);}
 .mem-screen-wrap{width:100%;aspect-ratio:16/9;background:#000;position:relative;overflow:hidden;}
 .mem-screen-wrap video{width:100%;height:100%;object-fit:cover;display:block;}
 .mem-screen-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);gap:.5rem;background:#000;}
-.mem-screen-ph-ico{font-size:1.5rem;opacity:.3;}
-.mem-screen-ph-txt{font-size:.68rem;letter-spacing:.08em;opacity:.6;}
-.mem-hover-hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .25s;}
-.mem-card:hover .mem-hover-hint{background:rgba(0,0,0,.4);}
-.mem-expand-lbl{opacity:0;transform:scale(.85);transition:all .25s;background:rgba(210,168,68,.2);border:1px solid rgba(210,168,68,.5);border-radius:1px;padding:.4rem .9rem;font-size:.68rem;color:rgba(220,190,110,.95);letter-spacing:.15em;font-family:'Cinzel',serif;}
-.mem-card:hover .mem-expand-lbl{opacity:1;transform:scale(1);}
 .mem-info-row{padding:1rem 1.2rem;display:flex;align-items:center;gap:.9rem;}
 .mem-av{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.95rem;border:1px solid rgba(210,168,68,.14);background:linear-gradient(135deg,rgba(100,80,180,.14),rgba(60,50,120,.08));}
 .mem-details{flex:1;min-width:0;}
 .mc-name{font-size:.9rem;font-weight:600;color:rgba(210,188,148,.88);margin-bottom:.15rem;}
 .mc-meta{display:flex;align-items:center;gap:.7rem;margin-bottom:.3rem;flex-wrap:wrap;}
-.mc-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(72,200,120,.4);animation:pg 2s infinite;flex-shrink:0;}
+.mc-dot{width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 5px rgba(72,200,120,.4);animation:pg 2s infinite;}
 .mc-time{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);}
-.mc-sb{font-size:.58rem;padding:.1rem .35rem;border-radius:1px;background:rgba(72,200,120,.1);border:1px solid rgba(72,200,120,.22);color:rgba(72,200,120,.75);}
 .mc-task{font-size:.75rem;color:rgba(175,152,108,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.empty-st{grid-column:1/-1;text-align:center;padding:4rem 2rem;color:var(--muted);}
-.empty-ico{font-size:2.2rem;margin-bottom:.9rem;opacity:.35;}
-.empty-txt{font-size:.82rem;letter-spacing:.08em;line-height:1.9;}
 
-/* FULLSCREEN */
-.det-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,3,2,.92);backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;animation:fi .25s ease;}
+/* FULLSCREEN & OTHERS */
+.det-overlay{position:fixed;inset:0;z-index:200;background:rgba(4,3,2,.92);backdrop-filter:blur(14px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;}
 .det-overlay.hidden{display:none;}
 .det-top{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:960px;margin-bottom:1rem;}
-.det-info{display:flex;align-items:center;gap:1rem;}
-.det-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;border:1px solid rgba(210,168,68,.22);background:linear-gradient(135deg,rgba(210,155,50,.2),rgba(180,125,40,.1));}
-.det-name{font-size:1rem;font-weight:600;color:rgba(228,205,152,.95);}
-.det-el{font-family:'DM Mono',monospace;font-size:.78rem;color:rgba(210,168,68,.6);margin-top:.15rem;}
-.det-task{font-size:.75rem;color:var(--muted);margin-top:.1rem;}
-.det-close{background:transparent;border:1px solid rgba(210,168,68,.2);border-radius:1px;color:var(--muted);font-size:.75rem;font-family:'Cinzel',serif;letter-spacing:.2em;padding:.45rem .9rem;cursor:pointer;transition:all .3s;}
-.det-close:hover{border-color:rgba(210,168,68,.5);color:var(--text);}
-.det-screen{width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border:1px solid rgba(210,168,68,.12);border-radius:2px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.det-screen video{width:100%;height:100%;object-fit:contain;display:none;}
-.det-ph{text-align:center;color:var(--muted);}
-.det-ph-ico{font-size:2.5rem;opacity:.25;margin-bottom:.8rem;}
-.det-ph-txt{font-size:.8rem;letter-spacing:.08em;line-height:1.8;}
-.connecting{font-size:.75rem;color:rgba(210,168,68,.5);display:flex;align-items:center;gap:.7rem;}
-.spin{width:12px;height:12px;border:1.5px solid rgba(210,168,68,.2);border-top-color:rgba(210,168,68,.7);border-radius:50%;animation:sp .8s linear infinite;}
-@keyframes sp{to{transform:rotate(360deg)}}
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(180,50,30,.92);color:#fff;font-size:.8rem;padding:.7rem 1.5rem;border-radius:2px;z-index:999;display:none;white-space:nowrap;}
+.det-screen{width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border:1px solid rgba(210,168,68,.12);border-radius:2px;overflow:hidden;}
+.det-screen video{width:100%;height:100%;object-fit:contain;}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:rgba(180,50,30,.92);color:#fff;font-size:.8rem;padding:.7rem 1.5rem;border-radius:2px;z-index:999;display:none;}
 .hidden{display:none!important;}
-@media(max-width:800px){
-  .room-body{grid-template-columns:1fr;padding:1.2rem 1rem 2rem;}
-  .site-header{padding:1rem 1.2rem;}
-  .modal{padding:2rem 1.5rem 2.5rem;}
-  .lobby-title{font-size:1.6rem;}
-  .mems-grid{grid-template-columns:1fr;}
-}
+@media(max-width:800px){.room-body{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -168,11 +124,10 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
   <div class="brand"><div class="brand-dot"></div>STUDY ROOM<div class="brand-dot"></div></div>
   <div class="hclock"><div class="htime" id="htime">--:--</div><div class="hdate" id="hdate"></div></div>
   <div style="min-width:120px;display:flex;justify-content:flex-end;">
-    <button class="leave-btn" id="leave-btn" onclick="handleLeave()">离开自习室</button>
+    <button class="leave-btn" id="leave-btn" onclick="location.reload()">离开自习室</button>
   </div>
 </header>
 
-<!-- LOBBY -->
 <div id="lobby">
   <div class="lobby-hero">
     <div class="lobby-eye">OPEN STUDY SESSION</div>
@@ -180,25 +135,23 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
     <div class="lobby-sub">专注当下，与同行者共进</div>
   </div>
   <div class="count-badge"><div class="live-dot"></div><div class="count-txt">当前在线 <span class="count-n" id="lobby-count">0</span> 人正在自习</div></div>
-  <div class="lobby-grid" id="lobby-grid"><div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div></div>
+  <div class="lobby-grid" id="lobby-grid"></div>
   <button class="start-btn" onclick="openJoinModal()">开始自习</button>
 </div>
 
-<!-- JOIN MODAL -->
 <div class="overlay hidden" id="join-modal">
   <div class="modal">
     <div class="modal-title">进入自习室</div>
     <div class="modal-sub">告诉大家你是谁，今天要做什么</div>
-    <div class="field"><label>用户名</label><input id="inp-user" placeholder="你想被叫什么？"/><div class="field-err" id="err-user"></div></div>
-    <div class="field"><label>今日任务</label><input id="inp-task" placeholder="今天要专注什么？"/><div class="field-err" id="err-task"></div></div>
+    <div class="field"><label>用户名</label><input id="inp-user" placeholder="你想被叫什么？"/></div>
+    <div class="field"><label>今日任务</label><input id="inp-task" placeholder="今天要专注什么？"/></div>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="closeJoinModal()">取消</button>
-      <button class="btn-confirm" id="confirm-btn" onclick="handleJoin()">进入自习室 →</button>
+      <button class="btn-confirm" onclick="handleJoin()">进入自习室 →</button>
     </div>
   </div>
 </div>
 
-<!-- ROOM -->
 <div id="room">
   <div class="room-body">
     <div class="my-panel">
@@ -210,463 +163,191 @@ body{background:var(--ink);font-family:'Noto Serif SC',serif;color:var(--text);m
         <div class="my-tl">当前任务</div>
         <div class="my-tv" id="my-tv"></div>
         <div class="share-tog" onclick="toggleShare()">
-          <div class="tog-icon">🖥️</div>
           <div style="flex:1;"><div class="tog-lbl">共享我的屏幕</div><div class="tog-desc" id="tog-desc">开启后他人可实时查看</div></div>
           <div class="tog-sw" id="tog-sw"><div class="tog-knob"></div></div>
         </div>
       </div>
     </div>
     <div class="mems-panel">
-      <div class="mems-hdr"><div class="panel-lbl" style="margin-bottom:0;flex:1;">自习室成员 <span class="mems-cnt" id="room-cnt">(0 人)</span></div></div>
+      <div class="panel-lbl">自习室成员 <span id="room-cnt"></span></div>
       <div class="mems-grid" id="room-grid"></div>
     </div>
   </div>
 </div>
 
-<!-- FULLSCREEN -->
 <div class="det-overlay hidden" id="det-overlay">
   <div class="det-top">
-    <div class="det-info">
-      <div class="det-av" id="d-av">👤</div>
-      <div><div class="det-name" id="d-name"></div><div class="det-el" id="d-el"></div><div class="det-task" id="d-task"></div></div>
-    </div>
-    <button class="det-close" onclick="closeDetail()">✕ 关闭</button>
+    <div><div id="d-name" style="font-size:1.2rem;font-weight:600;"></div><div id="d-task" style="color:var(--muted);font-size:.8rem;"></div></div>
+    <button class="btn-cancel" onclick="closeDetail()" style="flex:none;width:auto;padding:0.5rem 1rem;">✕ 关闭</button>
   </div>
-  <div class="det-screen" id="det-screen">
-    <div class="det-ph" id="det-ph"><div class="det-ph-ico">🖥️</div><div class="det-ph-txt" id="det-ph-txt">该成员未开启屏幕共享</div></div>
-    <video id="det-video" autoplay playsinline></video>
-  </div>
+  <div class="det-screen"><video id="det-video" autoplay playsinline></video></div>
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, remove, serverTimestamp }
-  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://pnadzkvsgyrccznvxikn.supabase.co";
+const SUPABASE_KEY = "sb_publishable_vo7oHppoqPcpvI4WosA3lg_YlDO0ETc";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBfIpw3Ugij963c_ExgjyK9SReAjlwOrLA",
-  authDomain: "study-room-3decf.firebaseapp.com",
-  databaseURL: "https://study-room-3decf-default-rtdb.firebaseio.com",
-  projectId: "study-room-3decf",
-  storageBucket: "study-room-3decf.firebasestorage.app",
-  messagingSenderId: "510744691186",
-  appId: "1:510744691186:web:852cd6bbbef776c648eb6b"
-};
+let myId = null, meData = {}, allMembers = {};
+let roomChannel = null, localStream = null;
+let viewerConns = {}, sharerConns = {}, viewerStreams = {};
+const ICE = { iceServers: [{urls:"stun:stun.l.google.com:19302"}] };
 
-const app = initializeApp(firebaseConfig);
-const db  = getDatabase(app);
+const uid = () => Math.random().toString(36).slice(2, 11);
+const fmt = ms => { const s=Math.floor(ms/1000),m=Math.floor(s/60),h=Math.floor(m/60); return h?`${h}h ${m%60}m` : `${m}m ${s%60}s`; };
+const av = n => ["👩‍💻","👨‍🎓","🧑‍🎨","👩‍🔬","🧑‍💼"][n.charCodeAt(0) % 5];
 
-// Fetch server time offset to correct for clock skew between devices
-let serverOffset = 0;
-onValue(ref(db, ".info/serverTimeOffset"), snap => {
-  serverOffset = snap.val() || 0;
-});
-const serverNow = () => Date.now() + serverOffset;
+/* ── SUPABASE LOGIC ── */
+async function setupRealtime() {
+  roomChannel = supabase.channel('study-room', { config: { presence: { key: myId } } });
 
-/* ── STATE ── */
-let myId = null, myRef = null, joinTime = null, meData = {};
-let localStream = null;
-let sharerConns  = {};   // viewerId  -> RTCPeerConnection  (I am sharer)
-let viewerConns  = {};   // sharerId  -> RTCPeerConnection  (I am viewer, thumbnail)
-let viewerStreams = {};   // sharerId  -> MediaStream
-let detConn = null, viewingId = null;
-let heartTimer = null, elapsedTimer = null, detTimer = null;
-let allMembers = {};
-const ICE = { iceServers: [{urls:"stun:stun.l.google.com:19302"},{urls:"stun:stun1.l.google.com:19302"}] };
+  roomChannel
+    .on('presence', { event: 'sync' }, () => {
+      const state = roomChannel.presenceState();
+      allMembers = {};
+      Object.entries(state).forEach(([id, p]) => { allMembers[id] = p[0]; });
+      
+      // WebRTC Auto Connect logic
+      Object.entries(allMembers).forEach(([id, m]) => {
+        if (id !== myId && m.sharing && !viewerConns[id]) startWebRTC(id);
+        if (viewerConns[id] && !m.sharing) stopWebRTC(id);
+      });
+      renderUI();
+    })
+    .on('broadcast', { event: 'signal' }, async ({ payload }) => {
+      if (payload.to !== myId) return;
+      if (payload.type === 'offer') await handleOffer(payload.from, payload.data);
+      else if (payload.type === 'answer') viewerConns[payload.from]?.setRemoteDescription(new RTCSessionDescription(payload.data));
+      else if (payload.type === 'ice') (viewerConns[payload.from] || sharerConns[payload.from])?.addIceCandidate(new RTCIceCandidate(payload.data));
+    })
+    .subscribe(async (status) => {
+      if (status === 'SUBSCRIBED' && myId) {
+        await roomChannel.track(meData);
+        // Sync to SQL table
+        await supabase.from('members').upsert({
+          id: myId, username: meData.username, task: meData.task,
+          join_time: meData.joinTime, last_seen: Date.now(), sharing: false
+        });
+      }
+    });
 
-/* ── UTILS ── */
-const uid  = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
-const fmt  = ms => { if(ms<0) ms=0; const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sc=s%60; return h?`${h}h ${m}m ${sc}s`:m?`${m}m ${sc}s`:`${sc}s`; };
-const esc  = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-const AVS  = ["👩‍💻","👨‍🎓","🧑‍🎨","👩‍🔬","🧑‍💼","👨‍🏫","🧑‍🚀","👩‍🎤","🧑‍🔬","👨‍💻","🧑‍🍳","👨‍🎨"];
-const av   = n => AVS[n.charCodeAt(0) % AVS.length];
-
-function showToast(msg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg; t.style.display = "block";
-  setTimeout(()=>{ t.style.display="none"; }, 5000);
+  // Heartbeat for SQL table
+  setInterval(async () => {
+    if (myId) await supabase.from('members').update({ last_seen: Date.now() }).eq('id', myId);
+  }, 30000);
 }
 
-/* ── CLOCK ── */
-const tickClock = () => {
-  const n = new Date();
-  document.getElementById("htime").textContent = n.toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit"});
-  document.getElementById("hdate").textContent = n.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"short"});
-};
-tickClock(); setInterval(tickClock, 1000);
-
-/* ── LISTEN MEMBERS ── */
-onValue(ref(db,"members"), snap => {
-  const raw = snap.val() || {}, now = serverNow();
-  const prev = {...allMembers};
-  allMembers = {};
-  Object.entries(raw).forEach(([id,m]) => {
-    // Use a generous 30-second window to handle clock skew between devices
-    if(now - m.lastSeen < 30000) allMembers[id] = m;
-  });
-
-  if(myId) {
-    // start thumbnail connections for new sharers
-    Object.entries(allMembers).forEach(([id,m]) => {
-      if(id !== myId && m.sharing && !viewerConns[id]) startThumbnail(id);
-    });
-    // drop connections for departed/stopped members
-    Object.keys(viewerConns).forEach(id => {
-      if(!allMembers[id] || !allMembers[id].sharing) dropThumbnail(id);
-    });
-  }
-
-  renderLobby();
-  if(myId) renderRoom();
-}, err => showToast("数据库错误: " + err.message));
-
-/* ── LOBBY ── */
-function renderLobby() {
+/* ── UI RENDER ── */
+function renderUI() {
   const others = Object.entries(allMembers).filter(([id]) => id !== myId);
   document.getElementById("lobby-count").textContent = others.length;
-  const g = document.getElementById("lobby-grid");
-  if(!others.length) { g.innerHTML='<div class="lobby-empty">暂无成员，成为第一个进入的人吧 ✨</div>'; return; }
-  g.innerHTML = others.map(([id,m],i) => `
-    <div class="lobby-card" style="animation-delay:${i*.06}s" data-id="${id}">
-      <div class="lc-top"><div class="lc-av">${av(m.username)}</div>
-        <div><div class="lc-name">${esc(m.username)}</div>
-          <div class="lc-meta"><span class="lc-time">⏱ ${fmt(serverNow()-m.joinTime)}</span>${m.sharing?'<span class="lc-sbadge">📺 共享中</span>':""}</div>
-        </div></div>
-      <div class="lc-task">${esc(m.task)}</div>
-      <div class="lc-hint">点击查看详情 →</div>
+  
+  // Lobby Grid
+  const lg = document.getElementById("lobby-grid");
+  lg.innerHTML = others.map(([id, m]) => `
+    <div class="lobby-card">
+      <div class="lc-top"><div class="lc-av">${av(m.username)}</div><div class="lc-name">${m.username}</div></div>
+      <div class="lc-task">${m.task}</div>
     </div>`).join("");
-  g.querySelectorAll(".lobby-card").forEach(el =>
-    el.onclick = () => openDetail(el.dataset.id, allMembers[el.dataset.id])
-  );
-}
 
-/* ── ROOM ── */
-function renderRoom() {
-  const others = Object.entries(allMembers).filter(([id]) => id !== myId);
-  document.getElementById("room-cnt").textContent = `(${others.length} 人)`;
-  const grid = document.getElementById("room-grid");
-
-  if(!others.length) {
-    grid.innerHTML = '<div class="empty-st"><div class="empty-ico">🌙</div><div class="empty-txt">自习室目前只有你<br>把链接分享给朋友，一起专注吧</div></div>';
-    return;
-  }
-
-  const newIds = new Set(others.map(([id])=>id));
-
-  // remove stale cards + empty state
-  [...grid.children].forEach(el => {
-    if(!el.dataset.id || !newIds.has(el.dataset.id)) el.remove();
-  });
-
-  others.forEach(([id,m], i) => {
-    let card = grid.querySelector(`.mem-card[data-id="${id}"]`);
+  // Room Grid
+  const rg = document.getElementById("room-grid");
+  document.getElementById("room-cnt").textContent = `(${others.length})`;
+  others.forEach(([id, m]) => {
+    let card = rg.querySelector(`[data-id="${id}"]`);
     if(!card) {
-      card = document.createElement("div");
-      card.className = "mem-card";
-      card.dataset.id = id;
-      card.style.animationDelay = `${i*.05}s`;
-      card.innerHTML = `
-        <div class="mem-screen-wrap">
-          <div class="mem-screen-ph" id="sph-${id}">
-            <div class="mem-screen-ph-ico">🖥️</div>
-            <div class="mem-screen-ph-txt">${m.sharing?"连接中…":"未开启共享"}</div>
-          </div>
-          <video id="svid-${id}" autoplay playsinline muted style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"></video>
-          <div class="mem-hover-hint"><div class="mem-expand-lbl">展开查看</div></div>
-        </div>
-        <div class="mem-info-row">
-          <div class="mem-av">${av(m.username)}</div>
-          <div class="mem-details">
-            <div class="mc-name">${esc(m.username)}</div>
-            <div class="mc-meta">
-              <div class="mc-dot"></div>
-              <span class="mc-time" id="mtime-${id}">已学习 ${fmt(serverNow()-m.joinTime)}</span>
-              ${m.sharing?'<span class="mc-sb" id="msb-${id}">📺 共享中</span>':`<span id="msb-${id}"></span>`}
-            </div>
-            <div class="mc-task">${esc(m.task)}</div>
-          </div>
-        </div>`;
-      card.onclick = () => openDetail(id, allMembers[id]);
-      grid.appendChild(card);
-    } else {
-      // update dynamic parts
-      const tEl = card.querySelector(`#mtime-${id}`);
-      if(tEl) tEl.textContent = "已学习 " + fmt(serverNow()-m.joinTime);
-      const sbEl = card.querySelector(`#msb-${id}`);
-      if(sbEl) sbEl.innerHTML = m.sharing ? '📺 共享中' : '';
-      const ph = card.querySelector(`#sph-${id}`);
-      if(ph) ph.querySelector(".mem-screen-ph-txt").textContent = m.sharing ? "连接中…" : "未开启共享";
+      card = document.createElement("div"); card.className="mem-card"; card.dataset.id=id;
+      card.innerHTML=`<div class="mem-screen-wrap"><video id="v-${id}" autoplay playsinline muted></video><div class="mem-screen-ph" id="p-${id}">未开启共享</div></div>
+      <div class="mem-info-row"><div class="mem-av">${av(m.username)}</div><div><div class="mc-name">${m.username}</div><div class="mc-task">${m.task}</div></div></div>`;
+      card.onclick = () => openDetail(id, m);
+      rg.appendChild(card);
     }
-    // attach stream if available
-    attachStream(id);
+    const vid = card.querySelector('video'), ph = card.querySelector('.mem-screen-ph');
+    if(viewerStreams[id]) { vid.srcObject = viewerStreams[id]; vid.style.display="block"; ph.style.display="none"; }
+    else { vid.style.display="none"; ph.style.display="flex"; ph.textContent = m.sharing ? "连接中..." : "未开启共享"; }
   });
+  [...rg.children].forEach(c => { if(!allMembers[c.dataset.id] && c.dataset.id !== myId) c.remove(); });
 }
 
-function attachStream(id) {
-  const stream = viewerStreams[id];
-  const video  = document.getElementById(`svid-${id}`);
-  const ph     = document.getElementById(`sph-${id}`);
-  if(!video) return;
-  if(stream && video.srcObject !== stream) {
-    video.srcObject = stream;
-    video.style.display = "block";
-    if(ph) ph.style.display = "none";
-  }
-}
-
-/* ── THUMBNAIL WebRTC ──
-   Signal path: signals/SHARER_ID/offers/VIEWER_ID  (viewer writes offer)
-                signals/SHARER_ID/answers/VIEWER_ID (sharer writes answer)
-                signals/SHARER_ID/vic/VIEWER_ID/N   (viewer ICE)
-                signals/SHARER_ID/sic/VIEWER_ID/N   (sharer ICE)
-*/
-async function startThumbnail(sharerId) {
-  if(viewerConns[sharerId]) return;
-  const pc = new RTCPeerConnection(ICE);
-  viewerConns[sharerId] = pc;
-  pc.addTransceiver("video", {direction:"recvonly"});
-
-  pc.ontrack = e => {
-    viewerStreams[sharerId] = e.streams[0];
-    attachStream(sharerId);
-    // feed fullscreen modal if open for this member
-    if(viewingId === sharerId) feedDetail(e.streams[0]);
-  };
-
-  let vic = [];
-  pc.onicecandidate = e => {
-    if(e.candidate) {
-      set(ref(db,`signals/${sharerId}/vic/${myId}/${vic.length}`), {c:e.candidate.toJSON()});
-      vic.push(1);
-    }
-  };
-
-  const offer = await pc.createOffer();
-  await pc.setLocalDescription(offer);
-  await set(ref(db,`signals/${sharerId}/offers/${myId}`), {sdp:offer.sdp, type:offer.type});
-
-  // listen for answer
-  onValue(ref(db,`signals/${sharerId}/answers/${myId}`), async snap => {
-    if(!snap.val() || pc.signalingState !== "have-local-offer") return;
-    try { await pc.setRemoteDescription(snap.val()); } catch{}
-  });
-
-  // listen for sharer ICE
-  onValue(ref(db,`signals/${sharerId}/sic/${myId}`), snap => {
-    Object.values(snap.val()||{}).forEach(async c => {
-      try { await pc.addIceCandidate(new RTCIceCandidate(c.c)); } catch{}
-    });
-  });
-
-  pc.onconnectionstatechange = () => {
-    if(["failed","closed"].includes(pc.connectionState)) dropThumbnail(sharerId);
-  };
-}
-
-function dropThumbnail(id) {
-  const pc = viewerConns[id];
-  if(pc) { try{pc.close();}catch{} delete viewerConns[id]; }
-  delete viewerStreams[id];
-  const video = document.getElementById(`svid-${id}`);
-  if(video) { video.srcObject=null; video.style.display="none"; }
-  const ph = document.getElementById(`sph-${id}`);
-  if(ph) { ph.style.display="flex"; ph.querySelector(".mem-screen-ph-txt").textContent="未开启共享"; }
-  if(myId) remove(ref(db,`signals/${id}/offers/${myId}`)).catch(()=>{});
-}
-
-/* ── SHARER side: listen for viewer offers ── */
-function listenAsSharer() {
-  onValue(ref(db,`signals/${myId}/offers`), async snap => {
-    const viewers = snap.val() || {};
-    for(const [vid, offerData] of Object.entries(viewers)) {
-      if(sharerConns[vid] || !localStream) continue;
-      await answerViewer(vid, offerData);
-    }
-  });
-}
-
-async function answerViewer(vid, offerData) {
-  const pc = new RTCPeerConnection(ICE);
-  sharerConns[vid] = pc;
-  localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
-
-  let sic = [];
-  pc.onicecandidate = e => {
-    if(e.candidate) {
-      set(ref(db,`signals/${myId}/sic/${vid}/${sic.length}`), {c:e.candidate.toJSON()});
-      sic.push(1);
-    }
-  };
-
-  try {
-    await pc.setRemoteDescription({sdp:offerData.sdp, type:offerData.type});
-    const answer = await pc.createAnswer();
-    await pc.setLocalDescription(answer);
-    await set(ref(db,`signals/${myId}/answers/${vid}`), {sdp:answer.sdp, type:answer.type});
-  } catch(e) { return; }
-
-  // listen for viewer ICE
-  onValue(ref(db,`signals/${myId}/vic/${vid}`), snap => {
-    Object.values(snap.val()||{}).forEach(async c => {
-      try { await pc.addIceCandidate(new RTCIceCandidate(c.c)); } catch{}
-    });
-  });
-
-  pc.onconnectionstatechange = () => {
-    if(["disconnected","failed","closed"].includes(pc.connectionState)) {
-      pc.close(); delete sharerConns[vid];
-      remove(ref(db,`signals/${myId}/answers/${vid}`)).catch(()=>{});
-    }
-  };
-}
-
-/* ── JOIN ── */
-window.openJoinModal  = () => document.getElementById("join-modal").classList.remove("hidden");
+/* ── ACTIONS ── */
+window.openJoinModal = () => document.getElementById("join-modal").classList.remove("hidden");
 window.closeJoinModal = () => document.getElementById("join-modal").classList.add("hidden");
-["inp-user","inp-task"].forEach(id =>
-  document.getElementById(id).addEventListener("keydown", e => { if(e.key==="Enter") handleJoin(); })
-);
 
-window.handleJoin = async () => {
-  const username = document.getElementById("inp-user").value.trim();
-  const task     = document.getElementById("inp-task").value.trim();
-  let ok = true;
-  document.getElementById("err-user").textContent = "";
-  document.getElementById("err-task").textContent = "";
-  if(!username){ document.getElementById("err-user").textContent="⚠ 请输入用户名"; ok=false; }
-  if(!task)    { document.getElementById("err-task").textContent="⚠ 请输入今日任务"; ok=false; }
-  if(!ok) return;
-
-  const btn = document.getElementById("confirm-btn");
-  btn.textContent="进入中…"; btn.disabled=true;
-  try {
-    myId = uid(); joinTime = serverNow();
-    myRef = ref(db, `members/${myId}`);
-    meData = { username, task, joinTime, lastSeen: serverNow(), sharing: false };
-    await set(myRef, meData);
-
-    heartTimer = setInterval(async () => {
-      try { meData.lastSeen = serverNow(); await set(myRef, meData); } catch{}
-    }, 2000);
-
-    elapsedTimer = setInterval(() => {
-      document.getElementById("my-el").textContent = "⏱ " + fmt(serverNow() - joinTime);
-    }, 1000);
-
-    closeJoinModal();
-    document.getElementById("lobby").style.display = "none";
-    document.getElementById("room").style.display  = "flex";
-    document.getElementById("leave-btn").style.display = "block";
-    document.getElementById("my-av").textContent   = av(username);
-    document.getElementById("my-name").textContent = username;
-    document.getElementById("my-tv").textContent   = task;
-
-    listenAsSharer();
-    window.addEventListener("beforeunload", () => { remove(myRef); cleanAll(); });
-
-    // connect thumbnails for anyone already sharing
-    Object.entries(allMembers).forEach(([id,m]) => {
-      if(id !== myId && m.sharing) startThumbnail(id);
-    });
-  } catch(e) {
-    showToast("进入失败: " + e.message);
-  } finally {
-    btn.textContent="进入自习室 →"; btn.disabled=false;
-  }
+window.handleJoin = () => {
+  const u = document.getElementById("inp-user").value, t = document.getElementById("inp-task").value;
+  if(!u || !t) return;
+  myId = uid(); meData = { username:u, task:t, joinTime:Date.now(), sharing:false };
+  document.getElementById("lobby").style.display="none";
+  document.getElementById("room").style.display="flex";
+  document.getElementById("leave-btn").style.display="block";
+  document.getElementById("my-name").textContent = u; document.getElementById("my-tv").textContent = t;
+  setupRealtime();
+  closeJoinModal();
+  setInterval(() => document.getElementById("my-el").textContent = "⏱ " + fmt(Date.now()-meData.joinTime), 1000);
 };
 
-/* ── SCREEN SHARE ── */
 window.toggleShare = async () => {
-  const sw = document.getElementById("tog-sw"), desc = document.getElementById("tog-desc");
+  const sw = document.getElementById("tog-sw"), ds = document.getElementById("tog-desc");
   if(localStream) {
     localStream.getTracks().forEach(t=>t.stop()); localStream=null;
-    sw.classList.remove("on"); desc.textContent="开启后他人可实时查看";
-    meData.sharing=false;
-    // close all sharer connections
-    Object.values(sharerConns).forEach(pc=>{try{pc.close();}catch{}});
-    sharerConns={};
-    try{ meData.lastSeen=serverNow(); await set(myRef,meData); }catch{}
+    sw.classList.remove("on"); ds.textContent="开启后他人可实时查看";
+    meData.sharing = false;
   } else {
     try {
-      localStream = await navigator.mediaDevices.getDisplayMedia({video:true,audio:false});
-      localStream.getVideoTracks()[0].addEventListener("ended", () => {
-        localStream=null; sw.classList.remove("on"); desc.textContent="开启后他人可实时查看";
-        Object.values(sharerConns).forEach(pc=>{try{pc.close();}catch{}});
-        sharerConns={};
-        meData.sharing=false; meData.lastSeen=serverNow();
-        set(myRef,meData).catch(()=>{});
-      });
-      sw.classList.add("on"); desc.textContent="屏幕共享已开启 🟢";
-      meData.sharing=true; meData.lastSeen=serverNow();
-      try{ await set(myRef,meData); }catch{}
-    } catch { localStream=null; sw.classList.remove("on"); }
+      localStream = await navigator.mediaDevices.getDisplayMedia({video:true});
+      sw.classList.add("on"); ds.textContent="正在共享屏幕 🟢";
+      meData.sharing = true;
+      localStream.getVideoTracks()[0].onended = () => { if(meData.sharing) toggleShare(); };
+    } catch(e) { return; }
   }
+  roomChannel.track(meData);
+  await supabase.from('members').update({ sharing: meData.sharing }).eq('id', myId);
 };
 
-/* ── LEAVE ── */
-window.handleLeave = async () => {
-  clearInterval(heartTimer); clearInterval(elapsedTimer);
-  if(localStream){ localStream.getTracks().forEach(t=>t.stop()); localStream=null; }
-  cleanAll();
-  if(myRef) await remove(myRef);
-  myId=null; myRef=null; joinTime=null; meData={};
-  document.getElementById("tog-sw").classList.remove("on");
-  document.getElementById("tog-desc").textContent="开启后他人可实时查看";
-  document.getElementById("room").style.display  = "none";
-  document.getElementById("lobby").style.display = "flex";
-  document.getElementById("leave-btn").style.display = "none";
-  document.getElementById("my-el").textContent = "⏱ 0s";
-  document.getElementById("room-grid").innerHTML = "";
-};
+/* ── WEBRTC SIGNALING ── */
+async function startWebRTC(sid) {
+  const pc = new RTCPeerConnection(ICE);
+  viewerConns[sid] = pc;
+  pc.onicecandidate = e => e.candidate && roomChannel.send({type:'broadcast',event:'signal',payload:{from:myId,to:sid,type:'ice',data:e.candidate}});
+  pc.ontrack = e => { viewerStreams[sid] = e.streams[0]; renderUI(); };
+  pc.addTransceiver("video", {direction:"recvonly"});
+  const offer = await pc.createOffer();
+  await pc.setLocalDescription(offer);
+  roomChannel.send({type:'broadcast',event:'signal',payload:{from:myId,to:sid,type:'offer',data:offer}});
+}
 
-/* ── DETAIL MODAL ── */
+async function handleOffer(sid, offer) {
+  if(!localStream) return;
+  const pc = new RTCPeerConnection(ICE);
+  sharerConns[sid] = pc;
+  localStream.getTracks().forEach(t => pc.addTrack(t, localStream));
+  pc.onicecandidate = e => e.candidate && roomChannel.send({type:'broadcast',event:'signal',payload:{from:myId,to:sid,type:'ice',data:e.candidate}});
+  await pc.setRemoteDescription(new RTCSessionDescription(offer));
+  const answer = await pc.createAnswer();
+  await pc.setLocalDescription(answer);
+  roomChannel.send({type:'broadcast',event:'signal',payload:{from:myId,to:sid,type:'answer',data:answer}});
+}
+
+function stopWebRTC(id) {
+  viewerConns[id]?.close(); delete viewerConns[id]; delete viewerStreams[id]; renderUI();
+}
+
 window.openDetail = (id, m) => {
-  if(!m) return;
-  viewingId = id;
-  document.getElementById("d-av").textContent   = av(m.username);
   document.getElementById("d-name").textContent = m.username;
-  document.getElementById("d-task").textContent = "📌 " + m.task;
-  document.getElementById("d-el").textContent   = "已学习 " + fmt(serverNow()-m.joinTime);
-  clearInterval(detTimer);
-  detTimer = setInterval(() => {
-    const c=allMembers[id]; if(c) document.getElementById("d-el").textContent="已学习 "+fmt(serverNow()-c.joinTime);
-  },1000);
-
-  const dv=document.getElementById("det-video"), dp=document.getElementById("det-ph"), dptxt=document.getElementById("det-ph-txt");
-  dv.style.display="none"; dv.srcObject=null; dp.style.display="flex";
+  document.getElementById("d-task").textContent = "正在学习: " + m.task;
+  const v = document.getElementById("det-video");
+  v.srcObject = viewerStreams[id] || null;
   document.getElementById("det-overlay").classList.remove("hidden");
-
-  const stream = viewerStreams[id];
-  if(stream) {
-    feedDetail(stream);
-  } else if(m.sharing) {
-    dptxt.innerHTML='<div class="connecting"><div class="spin"></div> 正在连接…</div>';
-  } else {
-    dptxt.textContent="该成员未开启屏幕共享";
-  }
 };
+window.closeDetail = () => document.getElementById("det-overlay").classList.add("hidden");
 
-function feedDetail(stream) {
-  const dv=document.getElementById("det-video"), dp=document.getElementById("det-ph");
-  if(!dv) return;
-  dv.srcObject=stream; dv.style.display="block"; dp.style.display="none";
-}
-
-window.closeDetail = () => {
-  clearInterval(detTimer);
-  document.getElementById("det-overlay").classList.add("hidden");
-  const dv=document.getElementById("det-video");
-  dv.srcObject=null; dv.style.display="none";
-  document.getElementById("det-ph").style.display="flex";
-  viewingId=null;
-};
-
-function cleanAll() {
-  Object.values(sharerConns).forEach(pc=>{try{pc.close();}catch{}});
-  sharerConns={};
-  Object.keys(viewerConns).forEach(id=>dropThumbnail(id));
-  if(myId) remove(ref(db,`signals/${myId}`)).catch(()=>{});
-}
+// Clock
+setInterval(() => {
+  const n = new Date();
+  document.getElementById("htime").textContent = n.toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
+  document.getElementById("hdate").textContent = n.toLocaleDateString('zh-CN', {month:'long', day:'numeric', weekday:'short'});
+}, 1000);
 </script>
 </body>
 </html>
