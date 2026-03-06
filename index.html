@@ -225,7 +225,7 @@ async function sbFetch(path, opts={}) {
       "apikey": SUPABASE_KEY,
       "Authorization": "Bearer " + SUPABASE_KEY,
       "Content-Type": "application/json",
-      "Prefer": "return=minimal",
+      
       ...(opts.headers||{})
     }
   });
@@ -357,7 +357,7 @@ function onMembersUpdate(rows) {
       if(id!==myId && m.sharing && !viewerConns[id]) startThumbnail(id);
     });
     Object.keys(viewerConns).forEach(id => {
-      if(!allMembers[id] || !allMembers[id].sharing) dropThumbnail(id);
+      if(!allMembers[id]) dropThumbnail(id);
     });
   }
 
@@ -367,7 +367,7 @@ function onMembersUpdate(rows) {
 
 // Poll every 5s as fallback + realtime
 connectRealtime(onMembersUpdate);
-setInterval(()=>loadMembers().then(onMembersUpdate), 5000);
+setInterval(()=>loadMembers().then(onMembersUpdate), 8000);
 loadMembers().then(onMembersUpdate);
 
 /* ── LOBBY ── */
