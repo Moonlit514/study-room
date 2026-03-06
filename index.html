@@ -284,7 +284,7 @@ function connectRealtime(onMembers) {
 
 async function loadMembers() {
   const now = Date.now();
-  const cutoff = now - 30000;
+  const cutoff = now - 20000;
   try {
     const rows = await sbFetch(`/rest/v1/members?last_seen=gt.${cutoff}&select=*`);
     return rows || [];
