@@ -13,6 +13,9 @@ const io = new Server(httpServer, {
 
 app.use(express.static(path.join(__dirname, "public")));
 
+// ── 健康检查端点（keep-alive ping 用）──────────────────
+app.get("/ping", (req, res) => res.send("pong"));
+
 // In-memory store: socketId → member data
 const members = new Map();
 
@@ -76,4 +79,25 @@ io.on("connection", (socket) => {
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, () => {
   console.log(`✅ 自习室服务器运行在 http://localhost:${PORT}`);
+  keepAlive();
 });
+
+// ── 自动唤醒：每14分钟 ping 自己，防止 Render 免费版休眠 ──
+function keepAlive() {
+  const RENDER_URL = process.env.RENDER_EXTERNAL_URL;
+  if (!RENDER_URL) {
+    console.log("📍 本地环境，跳过 keep-alive");
+    return;
+  }
+
+  const https = require("https");
+  setInterval(() => {
+    https.get(`${RENDER_URL}/ping`, (res) => {
+      console.log(`🔔 Keep-alive ping → ${res.statusCode}`);
+    }).on("error", (e) => {
+      console.warn("Keep-alive 失败:", e.message);
+    });
+  }, 14 * 60 * 1000); // 每 14 分钟
+
+  console.log(`⏰ Keep-alive 已启动 → ${RENDER_URL}/ping`);
+}
